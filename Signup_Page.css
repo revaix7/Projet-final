@@ -1,0 +1,93 @@
+/* Styles généraux du corps et du fond */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Conteneur d'inscription */
+.signup-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+}
+
+/* Styles de l'en-tête */
+.signup-header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* Styles des champs de saisie */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+    color: #333;
+}
+
+.input-group input:focus {
+    border-color: #007A87;
+    outline: none;
+}
+
+/* Bouton d'inscription */
+.signup-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #FF5A5F;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+    background-color: #ff2d39;
+}
+
+/* Liens du bas */
+.footer-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-prompt {
+    font-size: 14px;
+    color: #555;
+}
+
+.login-prompt a {
+    color: #007A87;
+    text-decoration: none;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}

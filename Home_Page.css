@@ -1,0 +1,12 @@
+body{
+    background-color: brown;
+}
+#menu{
+    height: 50px;
+    width: 100%;
+    background-color: aquamarine;
+}
+#menu div{
+    width: 20%;
+    background-color: green;
+}
