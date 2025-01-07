@@ -2,6 +2,8 @@ body{
     background-color: brown;
 }
 #menu{
+    display: flex;
+    justify-content: space-between;
     height: 50px;
     width: 100%;
     background-color: aquamarine;
