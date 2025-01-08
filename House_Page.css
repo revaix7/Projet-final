@@ -1,0 +1,147 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+.search-bar div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.search-bar div label {
+    font-size: 14px;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+.search-bar input[type="text"],
+.search-bar input[type="date"] {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #b0b0b0;
+}
+
+.search-bar button {
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.search-bar button:hover {
+    background-color: #e83257;
+}
+
+.search-bar button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Container for the gallery */
+.image-gallery {
+    display: flex;
+    gap: 8px;  /* Increased space between large image and thumbnails */
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Style for the main large image */
+.main-image img {
+    width: 100%;  /* Ensure it scales properly */
+    max-width: 600px;  /* Increased max-width for the large image */
+    height: 500px;  /* Increased height of the large image */
+    object-fit: cover;  /* Ensures the image covers the space without distortion */
+    border-radius: 10px 0px 0px 10px ;  /* Slightly larger rounded corners */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);  /* Increased shadow for more depth */
+}
+
+/* Container for thumbnail images */
+.thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;  /* Increased space between the rows of thumbnails */
+}
+
+/* Each row of thumbnails */
+.thumb-row {
+    display: flex;
+    gap: 8px;  /* Increased space between the two images in each row */
+}
+
+/* Style for the thumbnail images */
+.thumb-row img {
+    width: 100%;
+    max-width: 275px; /* Increased max-width for the small images */
+    height: 246px;  /* Increased height for the small images */
+    object-fit: cover;  /* Ensures the image covers the space without distortion */
+    cursor: pointer;  /* Indicate that the small images are clickable */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for small images */
+.thumb-row img:hover {
+    color: 0 6px 15px rgba(0, 0, 0, 0.173);  /* Increased shadow on hover */
+}
+
+#H_3{
+    border-radius: 0px 10px 0px 0px ;  /* Slightly larger rounded corners */
+}
+#H_5{
+    border-radius: 0px 0px 10px 0px ;  /* Slightly larger rounded corners */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .image-gallery {
+        flex-direction: column;  /* Stack the large and small images vertically */
+        align-items: center;
+    }
+
+    .main-image img {
+        max-width: 100%;  /* Make the large image full-width on small screens */
+        height: 320px;  /* Ensure height is maintained */
+    }
+
+    .thumbs {
+        flex-direction: row;
+        gap: 25px;
+        justify-content: center;  /* Align the thumbs horizontally on smaller screens */
+    }
+
+    .thumb-row img {
+        max-width: 100px;  /* Adjust max-width of small images on mobile */
+        height: 100px;  /* Adjust height for small images on mobile */
+    }
+}
+
