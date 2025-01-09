@@ -1,7 +1,8 @@
-.menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
 }
 
 .search-bar {
@@ -55,14 +56,233 @@
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease;
 }
 
-.search-bar button:hover {
-    background-color: #e83257;
+.Like {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #ff385c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, color 0.3s ease;
 }
 
-.search-bar button svg {
-    width: 20px;
-    height: 20px;
+.Like:active {
+    transform: scale(0.999);
+}
+
+.heart-icon {
+    font-size: 20px;
+    color: #ff385c; /* Default color */
+    transition: color 0.3s ease;
+}
+
+.heart-icon.filled {
+    color: #e83257; /* Filled heart color */
+}
+
+
+/* Container for the gallery */
+.image-gallery {
+    display: flex;
+    gap: 8px;  /* Increased space between large image and thumbnails */
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Style for the main large image */
+.main-image img {
+    width: 100%;  /* Ensure it scales properly */
+    max-width: 600px;  /* Increased max-width for the large image */
+    height: 500px;  /* Increased height of the large image */
+    object-fit: cover;  /* Ensures the image covers the space without distortion */
+    border-radius: 10px 0px 0px 10px ;  /* Slightly larger rounded corners */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);  /* Increased shadow for more depth */
+}
+
+/* Container for thumbnail images */
+.thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;  /* Increased space between the rows of thumbnails */
+}
+
+/* Each row of thumbnails */
+.thumb-row {
+    display: flex;
+    gap: 8px;  /* Increased space between the two images in each row */
+}
+
+/* Style for the thumbnail images */
+.thumb-row img {
+    width: 100%;
+    max-width: 275px; /* Increased max-width for the small images */
+    height: 246px;  /* Increased height for the small images */
+    object-fit: cover;  /* Ensures the image covers the space without distortion */
+    cursor: pointer;  /* Indicate that the small images are clickable */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for small images */
+.thumb-row img:hover {
+    color: 0 6px 15px rgba(0, 0, 0, 0.173);  /* Increased shadow on hover */
+}
+
+#H_3{
+    border-radius: 0px 10px 0px 0px ;  /* Slightly larger rounded corners */
+}
+#H_5{
+    border-radius: 0px 0px 10px 0px ;  /* Slightly larger rounded corners */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .image-gallery {
+        flex-direction: column;  /* Stack the large and small images vertically */
+        align-items: center;
+    }
+
+    .main-image img {
+        max-width: 100%;  /* Make the large image full-width on small screens */
+        height: 320px;  /* Ensure height is maintained */
+    }
+
+    .thumbs {
+        flex-direction: row;
+        gap: 25px;
+        justify-content: center;  /* Align the thumbs horizontally on smaller screens */
+    }
+
+    .thumb-row img {
+        max-width: 100px;  /* Adjust max-width of small images on mobile */
+        height: 100px;  /* Adjust height for small images on mobile */
+    }
+}
+
+.property-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin: 40px auto;
+    max-width: 1200px;
+    font-family: 'Arial', sans-serif;
+}
+
+.property-info {
+    flex: 2;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.reservation-section {
+    flex: 1;
+}
+
+.reservation-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #333;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 14px;
+}
+
+.new-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff385c;
+}
+
+.dates {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.dates div {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    font-size: 14px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="date"],
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+button {
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.breakdown {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.breakdown p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.total {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total p {
+    font-size: 18px;
+    color: #333;
 }
