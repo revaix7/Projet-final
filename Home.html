@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,13 +9,32 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
-    <header id="menu">
+    <header class="menu">
       <div id="logo">logo</div>
-      <div id="menu">filter</div>
-    </header>
-    <div>
+
+      <div class="search-bar">
+        <div>
+          <label for="location">Où</label>
+          <input type="text" id="location"placeholder="États-Unis" />
+        </div>
+        <div>
+          <label for="arrival">Arrivée</label>
+          <input type="date" id="arrival" />
+        </div>
+        <div>
+          <label for="departure">Départ</label>
+          <input type="date" id="departure" />
+        </div>
+        <div>
+          <label for="guests">Qui</label>
+          <input type="text" id="guests" placeholder="Qui vient?" />
+        </div>
+        <button type="button">
+          <svg></svg>
+        </button>
+      </div>
+      
       <div id="search">search</div>
-    </div>
-    <script src="script.js"></script>
   </body>
+  <script src="script.js"></script>
 </html>
