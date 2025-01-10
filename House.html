@@ -5,14 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Bar</title>
     <link rel="stylesheet" href="House_Page.css">
-    <script src="House_Page.js"></script>
 </head>
 <body>
     <header>
         <div class="search-bar">
-            <div>
+            <div class="location-container">
                 <label for="location">Où</label>
-                <input type="text" id="location" placeholder="États-Unis">
+                <input type="text" id="location" placeholder="États-Unis" oninput="filterLocations()" autocomplete="off">
+                <div id="location-dropdown" class="dropdown">
+                    <div class="dropdown-item" onclick="selectLocation('États-Unis')">
+                        <img src="https://via.placeholder.com/20" alt="USA flag" class="dropdown-icon"> États-Unis
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('France')">
+                        <img src="https://via.placeholder.com/20" alt="France flag" class="dropdown-icon"> France
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('Canada')">
+                        <img src="https://via.placeholder.com/20" alt="Canada flag" class="dropdown-icon"> Canada
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('Italy')">
+                        <img src="https://via.placeholder.com/20" alt="Italy flag" class="dropdown-icon"> Italy
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('Germany')">
+                        <img src="https://via.placeholder.com/20" alt="Germany flag" class="dropdown-icon"> Germany
+                    </div>
+                    <!-- Add more locations and images as needed -->
+                </div>
             </div>
             <div>
                 <label for="arrival">Arrivée</label>
@@ -31,6 +48,7 @@
                 </svg>
             </button>
         </div>
+        
     </header>
 
     <div>
@@ -82,22 +100,21 @@
         <div class="reservation-section">
             <div class="reservation-card">
                 <div class="price">
-                    <span class="old-price">386$ CAD</span>
-                    <span class="new-price">310$ CAD</span> <span>/ nuit</span>
+                    <span class="price_1" id="price">310$ CAD</span> <span>/ nuit</span>
                 </div>
                 <div class="dates">
                     <div>
                         <label>Arrivée</label>
-                        <input type="date" value="2025-01-13">
+                        <input type="date" id="arrival-date" value="2025-01-13" onchange="updatePrice()">
                     </div>
                     <div>
                         <label>Départ</label>
-                        <input type="date" value="2025-01-18">
+                        <input type="date" id="departure-date" value="2025-01-18" onchange="updatePrice()">
                     </div>
                 </div>
                 <div>
                     <label>Voyageurs</label>
-                    <select>
+                    <select id="guests" onchange="updatePrice()">
                         <option>1 voyageur</option>
                         <option>2 voyageurs</option>
                         <option>3 voyageurs</option>
@@ -107,22 +124,23 @@
                 <button>Réserver</button>
                 <p class="note">Vous ne payez pas la réservation tout de suite</p>
                 <div class="breakdown">
-                    <p>310$ CAD x 5 nuits <span>1 552$ CAD</span></p>
-                    <p>Frais de nettoyage <span>350$ CAD</span></p>
-                    <p>Frais de service Airbnb <span>269$ CAD</span></p>
-                    <p>Taxes <span>107$ CAD</span></p>
+                    <p id="nights-breakdown">310$ CAD x 5 nuits <span id="total-night-price">1 552$ CAD</span></p>
+                    <p>Frais de nettoyage <span id="cleaning-fees">350$ CAD</span></p>
+                    <p>Frais de service Airbnb <span id="service-fees">269$ CAD</span></p>
+                    <p>Taxes <span id="taxes">107$ CAD</span></p>
                 </div>
                 <div class="total">
-                    <p>Total <span>2 278$ CAD</span></p>
+                    <p>Total <span id="total-price"></span></p>
                 </div>
             </div>
         </div>
+        
     </div>
 
 
 
 
 
-
+    <script src="House_Page.js"></script>
 </body>
 </html>
