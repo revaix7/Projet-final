@@ -10,33 +10,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Function to handle form submission
-async function handleFormSubmit(event) {
+async function handleFormSubmit(event, attempt = 1) {
     event.preventDefault();
+
+    const submitButton = document.getElementById('submit-button'); // Access the submit button by ID
+    submitButton.disabled = true; // Disable the button to prevent multiple submissions
 
     const { username, email, password, confirmPassword } = getFormData();
 
-    // Check if password is at least 6 characters
+    // Enhanced email validation with common TLDs
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(com|org|net|co|io|edu|gov)$/;
+    if (!emailRegex.test(email)) {
+        displayError('Veuillez entrer une adresse e-mail valide avec un TLD courant.');
+        submitButton.disabled = false; // Re-enable the button
+        return;
+    }
+
     if (password.length < 6) {
         displayError('Le mot de passe doit comporter au moins 6 caractères.');
+        submitButton.disabled = false; // Re-enable the button
         return;
     }
 
     if (!validatePasswords(password, confirmPassword)) {
         displayError('Les mots de passe ne correspondent pas.');
+        submitButton.disabled = false;
         return;
     }
 
     displayError(''); // Clear previous errors
 
     try {
-        const user = await signUpUser(email, password); // Sign up user
-        await saveUserToDatabase(user.id, username, email); // Save user details and ID to DB
+        const user = await signUpUser(email, password); // Sign up user with Supabase (password is automatically hashed)
+        await saveUserToDatabase(username, email); // Save user details to DB (without password)
         alert('Inscription réussie! Veuillez vérifier votre e-mail pour confirmation.');
         window.location.href = 'Login.html'; // Redirect to login page
     } catch (error) {
+        if (error.message === "email rate limit exceeded" && attempt < 4) { // Retry max 3 times
+            const delayTime = Math.pow(2, attempt) * 1000; // Exponential backoff (1s, 2s, 4s)
+            displayError(`Trop de tentatives. Veuillez réessayer dans ${delayTime / 1000} secondes.`);
+            await delay(delayTime); // Wait for exponential backoff time before retrying
+            handleFormSubmit(event, attempt + 1); // Retry the form submission
+        } else {
+            displayError('Quelque chose a mal tourné. Veuillez réessayer plus tard.');
+            submitButton.disabled = false; // Re-enable button if retry limit reached
+        }
         console.error('Error during signup:', error);
-        displayError(error.message || 'Quelque chose a mal tourné. Veuillez réessayer plus tard.');
+    } finally {
+        submitButton.disabled = false; // Re-enable the button after the operation
     }
+}
+
+// Function to add a delay (in milliseconds)
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Function to get form data
@@ -57,25 +84,15 @@ function validatePasswords(password, confirmPassword) {
 // Function to sign up the user
 async function signUpUser(email, password) {
     const { user, error } = await supabaseClient.auth.signUp({ email, password });
-
-    if (error) {
-        if (error.status === 429) {
-            // Handle rate limiting (429 error)
-            throw new Error('Trop de demandes. Veuillez réessayer après 42 secondes.');
-        } else {
-            // Handle other types of errors
-            throw new Error(error.message);
-        }
-    }
-
+    if (error) throw new Error(error.message);
     return user; // Return user for further processing
 }
 
-// Function to save user details in the database
-async function saveUserToDatabase(userId, username, email) {
+// Function to save user details in the database (without password)
+async function saveUserToDatabase(username, email) {
     const { data, error } = await supabaseClient
         .from('Compte') // Ensure this is the correct table name
-        .insert([{ id: userId, username, email }]); // Insert the Supabase-generated user ID, username, and email
+        .insert([{ username, email }]); // Store only username and email in your custom database
     
     if (error) throw new Error('Database error saving new user: ' + error.message);
     console.log('User saved to database:', data); // Optionally log the saved data
