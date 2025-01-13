@@ -1,14 +1,223 @@
-body{
-    background-color: brown;
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-#menu{
+
+/* styles de div logo*/
+#logo img {
+    margin-left: 8rem;
+    height: 1.9rem;
+    filter: grayscale() brightness(0%);
+}
+
+#logo :hover{
+    filter: saturate(200%);
+}
+
+/* styles de div options*/
+#options {
+    margin-right: 8rem;
+    height: 2.5rem;
+    width: 5rem;
+    border-style: solid;
+    border-width: .25px;
+    border-radius: 9999px;
+    border-color: rgb(168, 168, 168);
+}
+#options img {
+    height: 1.25rem;
+}
+
+/* Search Bar Styles----------------------------------------------------*/
+.search-bar {
     display: flex;
     justify-content: space-between;
-    height: 50px;
+    align-items: center;
+    margin: 20px auto;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 30px;
+    /* Softer rounded edges like AirBnB */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
     width: 100%;
-    background-color: aquamarine;
+    transition: box-shadow 0.3s ease;
 }
-#menu div{
-    width: 20%;
-    background-color: green;
+
+/* Hover effect for search bar */
+.search-bar:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
+
+/* Input fields container */
+.search-bar div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+    /* Space between input fields */
+}
+
+/* Label Styles */
+.search-bar div label {
+    font-size: 12px;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+/* Input Styles */
+.search-bar input[type="text"],
+.search-bar input[type="date"] {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 25px;
+    /* More rounded input fields */
+    background-color: #f7f7f700;
+    transition: all 0.3s ease;
+}
+
+/* Placeholder text styling */
+.search-bar input[type="text"]::placeholder {
+    color: #b0b0b0;
+}
+
+/* Focused input fields */
+.search-bar input[type="text"]:focus,
+.search-bar input[type="date"]:focus {
+    border-color: #ff385c;
+    /* Highlight on focus */
+    box-shadow: 0 0 8px rgba(255, 56, 92, 0.4);
+    /* Soft glow effect */
+}
+
+/* Datalist styling (Dropdown for "location") */
+#location-options {
+    width: 100%;
+    font-size: 14px;
+    background-color: #ffffff00;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+/* Button Styles */
+.search-bar button {
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    /* Larger padding for better button size */
+    font-size: 14px;
+    border-radius: 25px;
+    /* Rounded button similar to the inputs */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    /* Make the text bold and consistent with AirBnB style */
+    height: 30px;
+    width: 30px;
+}
+
+/* Hover effect for button */
+.search-bar button:hover {
+    background-color: #e20f45;
+    /* Darken the button color on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* More prominent shadow */
+}
+
+
+/* Responsive Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px 24px;
+        max-width: 100%;
+    }
+
+    .search-bar div {
+        margin-right: 0;
+        margin-bottom: 16px;
+        /* Space between fields for mobile */
+    }
+
+    .search-bar button {
+        width: 100%;
+        /* Full width button on mobile */
+        height: 45px;
+    }
+}
+
+/* Dropdown container */
+.location-container {
+    position: relative;
+}
+
+#location-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: none;
+    /* Hidden initially */
+}
+
+.dropdown-item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-item img {
+    margin-right: 10px;
+    width: 20px;
+    /* Size of the icon */
+    height: 20px;
+    /* Size of the icon */
+    border-radius: 50%;
+    /* Optional: makes the image round */
+}
+
+/* Show the dropdown when the input field is focused */
+#location:focus+#location-dropdown {
+    display: block;
+}
+
+/* Optional: style the input field to look clean */
+#location {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
+}
+
+/* Hover and focus effects for the input */
+#location:hover,
+#location:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 8px rgba(255, 56, 92, 0.4);
+}
+
+/* fin de search bar styles---------------------------------------------*/

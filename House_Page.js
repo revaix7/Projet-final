@@ -1,3 +1,5 @@
+///////Hart btn
+
 document.addEventListener("DOMContentLoaded", function () {
     const likeButton = document.querySelector(".Like");
 
@@ -15,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+////////Dropdown
 
 
 // Filter the dropdown items based on the input text
@@ -44,7 +47,7 @@ function selectLocation(location) {
 
 
 
-
+///////Total price
 
 // Price constants
 const pricePerNight = 310;  // Price per night in CAD

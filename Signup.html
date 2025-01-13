@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page d'inscription - Airbnb</title>
     <link rel="stylesheet" href="Signup_Page.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js" defer></script>
 </head>
 <body>
     <div class="signup-container">
         <div class="signup-form">
             <h2 class="signup-header">Créez votre compte</h2>
-            <form action="#" method="post">
+            <form id="signup-form">
                 <div class="input-group">
                     <label for="username">Nom d'utilisateur</label>
                     <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
@@ -28,11 +29,15 @@
                     <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
                 </div>
                 <button type="submit" class="signup-btn">S'inscrire</button>
+                <p id="error-message" style="color:red;"></p>
             </form>
             <div class="footer-links">
                 <p class="login-prompt">Déjà un compte ? <a href="Login.html">Se connecter</a></p>
             </div>
         </div>
     </div>
+    
+    <!-- Link to your custom JS file -->
+    <script src="Signup.js" defer></script>
 </body>
 </html>

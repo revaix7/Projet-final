@@ -1,40 +1,65 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>HTML + CSS</title>
-    <link rel="stylesheet" href="Home_Page.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  </head>
-  <body>
-    <header class="menu">
-      <div id="logo">logo</div>
 
-      <div class="search-bar">
-        <div>
-          <label for="location">Où</label>
-          <input type="text" id="location"placeholder="États-Unis" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>HTML + CSS</title>
+  <link rel="stylesheet" href="Home_Page.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <header class="menu">
+
+    <div id="logo"><img src="img\Airbnb_Logo.png"></div>
+
+    <div id="options"><img src="img\menu-burger.png"></div>
+  </header>
+
+  <div class="search-bar">
+    <div class="location-container">
+      <label for="location">Où</label>
+      <input type="text" id="location" placeholder="États-Unis" oninput="filterLocations()" autocomplete="off">
+      <div id="location-dropdown" class="dropdown">
+        <div class="dropdown-item" onclick="selectLocation('États-Unis')">
+          <img src="https://via.placeholder.com/20" alt="USA flag" class="dropdown-icon"> États-Unis
         </div>
-        <div>
-          <label for="arrival">Arrivée</label>
-          <input type="date" id="arrival" />
+        <div class="dropdown-item" onclick="selectLocation('France')">
+          <img src="https://via.placeholder.com/20" alt="France flag" class="dropdown-icon"> France
         </div>
-        <div>
-          <label for="departure">Départ</label>
-          <input type="date" id="departure" />
+        <div class="dropdown-item" onclick="selectLocation('Canada')">
+          <img src="https://via.placeholder.com/20" alt="Canada flag" class="dropdown-icon"> Canada
         </div>
-        <div>
-          <label for="guests">Qui</label>
-          <input type="text" id="guests" placeholder="Qui vient?" />
+        <div class="dropdown-item" onclick="selectLocation('Italy')">
+          <img src="https://via.placeholder.com/20" alt="Italy flag" class="dropdown-icon"> Italy
         </div>
-        <button type="button">
-          <svg></svg>
-        </button>
+        <div class="dropdown-item" onclick="selectLocation('Germany')">
+          <img src="https://via.placeholder.com/20" alt="Germany flag" class="dropdown-icon"> Germany
+        </div>
+        <!-- Add more locations and images as needed -->
       </div>
-      
-      <div id="search">search</div>
-  </body>
-  <script src="script.js"></script>
+    </div>
+    <div>
+      <label for="arrival">Arrivée</label>
+      <input type="date" id="arrival">
+    </div>
+    <div>
+      <label for="departure">Départ</label>
+      <input type="date" id="departure">
+    </div>
+    <div>
+      <label for="guests">Qui</label>
+      <input type="text" id="guests" placeholder="Qui vient?">
+    </div>
+    <button type="button">
+      <svg>
+      </svg>
+    </button>
+  </div>
+
+</body>
+<script src="Home_Page.js"></script>
+
 </html>
