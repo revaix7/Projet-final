@@ -89,10 +89,10 @@ async function signUpUser(email, password) {
 }
 
 // Function to save user details in the database (without password)
-async function saveUserToDatabase(username, email) {
+async function saveUserToDatabase(username, email, password) {
     const { data, error } = await supabaseClient
         .from('Compte') // Ensure this is the correct table name
-        .insert([{ username, email }]); // Store only username and email in your custom database
+        .insert([{ username, email, password }]); // Store only username and email in your custom database
     
     if (error) throw new Error('Database error saving new user: ' + error.message);
     console.log('User saved to database:', data); // Optionally log the saved data
