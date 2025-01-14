@@ -11,7 +11,7 @@
     filter: grayscale() brightness(0%);
 }
 
-#logo :hover{
+#logo :hover {
     filter: saturate(200%);
 }
 
@@ -25,9 +25,46 @@
     border-radius: 9999px;
     border-color: rgb(168, 168, 168);
 }
+
 #options img {
     height: 1.25rem;
 }
+
+#options :hover{
+    /* add shadow */
+}
+
+/*house menu-------------------------------------------------------------*/
+.house_board {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    background-color: gray;
+    /*debug only*/
+    height: 22rem;
+    width: 16rem;
+}
+
+.card_img {
+    border-radius: 15px;
+    height: 16rem;
+    overflow: hidden;
+}
+
+.card_img img{
+    height: 16rem;
+    object-fit: contain;
+    object-position: -3.2rem;
+}
+
+
+
+
 
 /* Search Bar Styles----------------------------------------------------*/
 .search-bar {
