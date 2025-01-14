@@ -1,4 +1,4 @@
-// Initialize Supabase client by importing the necessary library
+// Initialize Supabase client
 const { createClient } = supabase; // This ensures the supabase object is available
 
 const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co'; // Replace with your URL
@@ -40,8 +40,14 @@ async function handleLoginFormSubmit(event) {
     try {
         const user = await signInUser(email, password); // Sign in user using Supabase auth
         if (user) {
-            alert('Connexion réussie!');
-            window.location.href = 'Dashboard.html'; // Redirect to the user dashboard after successful login
+            // Fetch user details from the 'Compte' table to get the 'unique_id'
+            const uniqueId = await fetchUniqueId(email);
+            if (uniqueId) {
+                alert('Connexion réussie!');
+                window.location.href = `Dashboard.html?unique_id=${uniqueId}`; // Redirect to the user dashboard with unique_id
+            } else {
+                displayError('Aucun utilisateur trouvé avec cet e-mail.');
+            }
         } else {
             displayError('E-mail ou mot de passe incorrect.');
         }
@@ -73,6 +79,22 @@ async function signInUser(email, password) {
     }
 
     return user; // Return user if authentication succeeds
+}
+
+// Function to fetch unique_id from the 'Compte' table based on email
+async function fetchUniqueId(email) {
+    const { data, error } = await supabaseClient
+        .from('Compte')
+        .select('unique_id') // Select the unique_id column
+        .eq('email', email)  // Filter by the email provided
+        .single(); // We expect only one result
+
+    if (error) {
+        console.error('Error fetching unique_id:', error);
+        return null; // Return null if an error occurs
+    }
+
+    return data?.unique_id; // Return the unique_id
 }
 
 // Function to display error messages

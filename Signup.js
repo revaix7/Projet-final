@@ -41,8 +41,8 @@ async function handleFormSubmit(event, attempt = 1) {
     displayError(''); // Clear previous errors
 
     try {
-        const user = await signUpUser(email, password); // Sign up user with Supabase (password is automatically hashed)
-        await saveUserToDatabase(username, email); // Save user details to DB (without password)
+        const uniqueId = generateUniqueId(); // Generate a unique ID for the user
+        await saveUserToDatabase(username, email, password, uniqueId); // Save user details to DB (including password and unique ID)
         alert('Inscription réussie! Veuillez vérifier votre e-mail pour confirmation.');
         window.location.href = 'Login.html'; // Redirect to login page
     } catch (error) {
@@ -81,18 +81,17 @@ function validatePasswords(password, confirmPassword) {
     return password === confirmPassword;
 }
 
-// Function to sign up the user
-async function signUpUser(email, password) {
-    const { user, error } = await supabaseClient.auth.signUp({ email, password });
-    if (error) throw new Error(error.message);
-    return user; // Return user for further processing
+// Function to generate a unique ID
+function generateUniqueId() {
+    // Generate a unique ID based on the current timestamp and a random string
+    return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); 
 }
 
-// Function to save user details in the database (without password)
-async function saveUserToDatabase(username, email, password) {
+// Function to save user details in the database (including password and unique ID)
+async function saveUserToDatabase(username, email, password, uniqueId) {
     const { data, error } = await supabaseClient
         .from('Compte') // Ensure this is the correct table name
-        .insert([{ username, email, password }]); // Store only username and email in your custom database
+        .insert([{ username, email, password, unique_id: uniqueId }]); // Store username, email, password, and unique_id in your custom database
     
     if (error) throw new Error('Database error saving new user: ' + error.message);
     console.log('User saved to database:', data); // Optionally log the saved data
