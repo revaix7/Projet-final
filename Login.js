@@ -46,6 +46,7 @@ const handleLogin = async (event) => {
 
 // Function to store data in localStorage
 function storeData(user) {
+    localStorage.clear();//----------------------------------------------------------
     // Ensure the user object contains the expected properties
     console.log("Storing data:", user); // Debugging log
 

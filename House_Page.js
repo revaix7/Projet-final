@@ -103,3 +103,66 @@ document.addEventListener('DOMContentLoaded', updatePrice);
 document.getElementById('arrival-date').addEventListener('change', updatePrice);
 document.getElementById('departure-date').addEventListener('change', updatePrice);
 document.getElementById('guests').addEventListener('change', updatePrice);
+
+
+//local sorage
+
+function storeReservationData() {
+    console.log("Storing data:"); // Debugging log
+
+    // Check if the elements exist before trying to access them
+    const arrivalDateElement = document.getElementById('arrival-date');
+    const departureDateElement = document.getElementById('departure-date');
+    const guestsElement = document.getElementById('guests');
+    const pricePerNightElement = document.getElementById('price-per-night');
+    const numberOfNightsElement = document.getElementById('number-of-nights');
+    const cleaningFeesElement = document.getElementById('cleaning-fees');
+    const serviceFeesElement = document.getElementById('service-fees');
+
+    if (!arrivalDateElement || !departureDateElement || !guestsElement || !pricePerNightElement ||
+        !numberOfNightsElement || !cleaningFeesElement || !serviceFeesElement ) {
+        alert("One or more elements are missing. Please check your HTML.");
+        return;
+    }
+
+    // Retrieve values from the DOM
+    const arrivalDate = arrivalDateElement.value;
+    const departureDate = departureDateElement.value;
+    const numberOfGuests = guestsElement.value;
+
+    // Retrieve pricing data
+    const pricePerNight = parseFloat(pricePerNightElement.innerText);
+    const numberOfNights = parseInt(numberOfNightsElement.value);
+    const cleaningFees = parseFloat(cleaningFeesElement.innerText);
+    const serviceFees = parseFloat(serviceFeesElement.innerText);
+    const taxRate = 0.13;  // Example tax rate
+    const totalNightPrice = pricePerNight * numberOfNights;
+    const totalTax = totalNightPrice * taxRate;
+    const totalPrice = totalNightPrice + cleaningFees + serviceFees + totalTax;
+
+    // Create an object with both reservation and pricing data
+    const reservationData = {
+        reservation: {
+            arrivalDate,
+            departureDate,
+            numberOfGuests
+        },
+        pricing: {
+            pricePerNight,
+            numberOfNights,
+            cleaningFees,
+            serviceFees,
+            totalNightPrice,
+            totalTax,
+            totalPrice
+        }
+    };
+
+    // Store it in localStorage as a JSON string
+    localStorage.setItem('reservationData', JSON.stringify(reservationData));
+
+    alert('Reservation and pricing data has been stored in localStorage!');
+}
+document.getElementById('Reserver').addEventListener('click', storeReservationData);
+
+
