@@ -58,19 +58,19 @@ document.addEventListener('DOMContentLoaded', function () {
 function storeReservationData() {
     const reservationData = {
         reservation: {
-            arrivalDate: "Jan 15, 2025",
-            departureDate: "Jan 20, 2025",
-            numberOfGuests: 2
+            arrivalDate: ,
+            departureDate,
+            numberOfGuests,
         },
         pricing: {
-            pricePerNight: 100,  // Example price per night
-            numberOfNights: 5,   // For example, 5 nights
-            cleaningFees: 20,
-            serviceFees: 15,
-            taxRate: 0.13,  // Example tax rate
-            totalNightPrice: 100 * 5,  // 5 nights at $100 per night
-            totalTax: 100 * 5 * 0.13,
-            totalPrice: 100 * 5 + 20 + 15 + (100 * 5 * 0.13)  // Total price including fees and tax
+            pricePerNight, // Example price per night
+            numberOfNights,  // For example, 5 nights
+            cleaningFees,
+            serviceFees,
+            taxRate, // Example tax rate
+            totalNightPrice, // 5 nights at $100 per night
+            totalTax,
+            totalPrice,  // Total price including fees and tax
         }
     };
 

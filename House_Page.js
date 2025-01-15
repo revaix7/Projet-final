@@ -108,61 +108,68 @@ document.getElementById('guests').addEventListener('change', updatePrice);
 //local sorage
 
 function storeReservationData() {
-    console.log("Storing data:"); // Debugging log
-
-    // Check if the elements exist before trying to access them
-    const arrivalDateElement = document.getElementById('arrival-date');
-    const departureDateElement = document.getElementById('departure-date');
-    const guestsElement = document.getElementById('guests');
-    const pricePerNightElement = document.getElementById('price-per-night');
-    const numberOfNightsElement = document.getElementById('number-of-nights');
+    console.log("Storing data:");
+    const arrivalDateElement = document.getElementById('arrival-date').value;
+    const departureDateElement = document.getElementById('departure-date').value;
+    const pricePerNightElement = document.getElementById('price');
+    const tnpElement = document.getElementById('total-night-price');
     const cleaningFeesElement = document.getElementById('cleaning-fees');
     const serviceFeesElement = document.getElementById('service-fees');
+    const taxElement = document.getElementById('taxes');
 
-    if (!arrivalDateElement || !departureDateElement || !guestsElement || !pricePerNightElement ||
-        !numberOfNightsElement || !cleaningFeesElement || !serviceFeesElement ) {
+    if (!arrivalDateElement || !departureDateElement || !pricePerNightElement || !tnpElement || !cleaningFeesElement || !serviceFeesElement) {
         alert("One or more elements are missing. Please check your HTML.");
         return;
     }
 
-    // Retrieve values from the DOM
-    const arrivalDate = arrivalDateElement.value;
-    const departureDate = departureDateElement.value;
-    const numberOfGuests = guestsElement.value;
+    const arrival = new Date(arrivalDateElement);
+    const departure = new Date(departureDateElement);
 
-    // Retrieve pricing data
+    // Convert dates to ISO 8601 format
+    const arrivalISO = arrival.toISOString();
+    const departureISO = departure.toISOString();
+
+    // Retrieve values from the DOM after the checks
     const pricePerNight = parseFloat(pricePerNightElement.innerText);
-    const numberOfNights = parseInt(numberOfNightsElement.value);
+    const numberOfNights = parseInt(tnpElement.innerText); // Get the number of nights from the total-night-price element
     const cleaningFees = parseFloat(cleaningFeesElement.innerText);
     const serviceFees = parseFloat(serviceFeesElement.innerText);
-    const taxRate = 0.13;  // Example tax rate
-    const totalNightPrice = pricePerNight * numberOfNights;
-    const totalTax = totalNightPrice * taxRate;
-    const totalPrice = totalNightPrice + cleaningFees + serviceFees + totalTax;
+    const totalTax = parseFloat(taxElement.innerText);
+
+    // Ensure pricing data is valid
+    if (isNaN(pricePerNight) || isNaN(cleaningFees) || isNaN(serviceFees) || isNaN(numberOfNights)) {
+        alert("Invalid pricing data. Please check your pricing elements.");
+        return;
+    }
+
+    // Calculate total tax and total price
+    const totalPrice = (pricePerNight * numberOfNights) + cleaningFees + serviceFees + totalTax;
+
+    // Log elements to console to ensure they're being found
+    console.log(arrival, departure, pricePerNightElement, tnpElement, cleaningFeesElement, serviceFeesElement, totalTax, totalPrice);
 
     // Create an object with both reservation and pricing data
     const reservationData = {
         reservation: {
-            arrivalDate,
-            departureDate,
-            numberOfGuests
+            arrival: arrivalISO,
+            departure: departureISO,
         },
         pricing: {
             pricePerNight,
-            numberOfNights,
             cleaningFees,
             serviceFees,
-            totalNightPrice,
             totalTax,
             totalPrice
         }
     };
 
-    // Store it in localStorage as a JSON string
+    // Store the reservation data in local storage
     localStorage.setItem('reservationData', JSON.stringify(reservationData));
 
+    
     alert('Reservation and pricing data has been stored in localStorage!');
 }
+
 document.getElementById('Reserver').addEventListener('click', storeReservationData);
 
 
