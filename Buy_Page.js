@@ -4,14 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (storedData) {
         // Display reservation data on the page
-        document.getElementById('reservation-dates').textContent = `${storedData.reservation.arrivalDate} - ${storedData.reservation.departureDate}`;
-        document.getElementById('total-price').textContent = `$${storedData.pricing.totalPrice.toFixed(2)} CAD`;
+        const place =document.getElementById('place').textContent = storedData.reservation.place;
+        const numberOfNights = document.getElementById('reservation-dates').textContent = storedData.reservation.numberOfNights;
+        const totalPrice = document.getElementById('total-price').textContent = `$${storedData.pricing.totalPrice.toFixed(2)} CAD`;
 
         // Display fees information
-        document.getElementById('cleaning-fees').textContent = `$${storedData.pricing.cleaningFees} CAD`;
-        document.getElementById('service-fees').textContent = `$${storedData.pricing.serviceFees} CAD`;
-        document.getElementById('taxes').textContent = `$${storedData.pricing.totalTax.toFixed(2)} CAD`;
-    } else {
+        const cleaningFees = document.getElementById('cleaning-fees').textContent = `$${storedData.pricing.cleaningFees} CAD`;
+        const serviceFees = document.getElementById('service-fees').textContent = `$${storedData.pricing.serviceFees} CAD`;
+        const totalTax = document.getElementById('taxes').textContent = `$${storedData.pricing.totalTax.toFixed(2)} CAD`;
+    } else {    
         alert("No reservation data found. Please make a reservation first.");
     }
 
@@ -50,32 +51,32 @@ document.addEventListener('DOMContentLoaded', function () {
         alert("Reservation has been cancelled.");
 
         // Close the current window/tab
-        window.close();  // Closes the current tab, will not work if the page was opened by a script
+        window.location.href = "House.html"; // Redirect to the home page  // Closes the current tab, will not work if the page was opened by a script
     });
 });
 
+
 // Function to store reservation data (you can call this after user interaction)
 function storeReservationData() {
+    // Example values for demonstration, you should replace these with actual data
+    
     const reservationData = {
         reservation: {
-            arrivalDate: ,
-            departureDate,
-            numberOfGuests,
+            place,
+            numberOfNights,
         },
         pricing: {
-            pricePerNight, // Example price per night
-            numberOfNights,  // For example, 5 nights
+            pricePerNight,
             cleaningFees,
             serviceFees,
-            taxRate, // Example tax rate
-            totalNightPrice, // 5 nights at $100 per night
             totalTax,
-            totalPrice,  // Total price including fees and tax
+            totalPrice
         }
     };
 
     // Store it in localStorage as a JSON string
     localStorage.setItem('reservationData', JSON.stringify(reservationData));
+    console.log(localStorage.getItem('reservationData'));
 
     alert('Reservation data has been stored in localStorage!');
 }

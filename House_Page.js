@@ -116,25 +116,26 @@ function storeReservationData() {
     const cleaningFeesElement = document.getElementById('cleaning-fees');
     const serviceFeesElement = document.getElementById('service-fees');
     const taxElement = document.getElementById('taxes');
+    const arrival = new Date(arrivalDateElement);
+    const departure = new Date(departureDateElement);
+    const timeDifference = departure - arrival;
+    const numberOfNights = timeDifference / (1000 * 3600 * 24); // Convert milliseconds to days
+    
 
     if (!arrivalDateElement || !departureDateElement || !pricePerNightElement || !tnpElement || !cleaningFeesElement || !serviceFeesElement) {
         alert("One or more elements are missing. Please check your HTML.");
         return;
     }
 
-    const arrival = new Date(arrivalDateElement);
-    const departure = new Date(departureDateElement);
 
-    // Convert dates to ISO 8601 format
-    const arrivalISO = arrival.toISOString();
-    const departureISO = departure.toISOString();
 
     // Retrieve values from the DOM after the checks
+    const place = document.getElementById('place').innerText;
     const pricePerNight = parseFloat(pricePerNightElement.innerText);
-    const numberOfNights = parseInt(tnpElement.innerText); // Get the number of nights from the total-night-price element
     const cleaningFees = parseFloat(cleaningFeesElement.innerText);
     const serviceFees = parseFloat(serviceFeesElement.innerText);
     const totalTax = parseFloat(taxElement.innerText);
+    const totalPrice = parseFloat(document.getElementById('total-price').innerText);
 
     // Ensure pricing data is valid
     if (isNaN(pricePerNight) || isNaN(cleaningFees) || isNaN(serviceFees) || isNaN(numberOfNights)) {
@@ -142,17 +143,16 @@ function storeReservationData() {
         return;
     }
 
-    // Calculate total tax and total price
-    const totalPrice = (pricePerNight * numberOfNights) + cleaningFees + serviceFees + totalTax;
 
     // Log elements to console to ensure they're being found
-    console.log(arrival, departure, pricePerNightElement, tnpElement, cleaningFeesElement, serviceFeesElement, totalTax, totalPrice);
+    console.log(place, arrival, departure, pricePerNightElement, tnpElement, cleaningFeesElement, serviceFeesElement, totalTax, totalPrice);
 
     // Create an object with both reservation and pricing data
     const reservationData = {
         reservation: {
-            arrival: arrivalISO,
-            departure: departureISO,
+            place,
+            numberOfNights,
+
         },
         pricing: {
             pricePerNight,
@@ -168,8 +168,9 @@ function storeReservationData() {
 
     
     alert('Reservation and pricing data has been stored in localStorage!');
+    window.location.href = "Buy.html"; // Redirect to the Buy page
 }
 
-document.getElementById('Reserver').addEventListener('click', storeReservationData);
+document.getElementById('Reserver').addEventListener('click', storeReservationData, );
 
 

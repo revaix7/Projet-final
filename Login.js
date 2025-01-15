@@ -61,6 +61,7 @@ function storeData(user) {
     localStorage.setItem('user', JSON.stringify(userData));
 
     alert('Data has been stored in localStorage!');
+    
 }
 
 
