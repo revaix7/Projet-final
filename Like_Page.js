@@ -19,7 +19,7 @@ window.onload = function() {
 function retrieveData() {
     // Retrieve the data from localStorage using the same key ('user')
     const userData = localStorage.getItem('user');
-
+    
     // Ensure the data exists in localStorage
     if (userData) {
         // Parse the JSON string back into an object

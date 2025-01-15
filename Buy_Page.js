@@ -1,21 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if reservation data is in localStorage
-    const storedData = JSON.parse(localStorage.getItem('reservationData'));
-
-    if (storedData) {
-        // Display reservation data on the page
-        const place =document.getElementById('place').textContent = storedData.reservation.place;
-        const numberOfNights = document.getElementById('reservation-dates').textContent = storedData.reservation.numberOfNights;
-        const totalPrice = document.getElementById('total-price').textContent = `$${storedData.pricing.totalPrice.toFixed(2)} CAD`;
-
-        // Display fees information
-        const cleaningFees = document.getElementById('cleaning-fees').textContent = `$${storedData.pricing.cleaningFees} CAD`;
-        const serviceFees = document.getElementById('service-fees').textContent = `$${storedData.pricing.serviceFees} CAD`;
-        const totalTax = document.getElementById('taxes').textContent = `$${storedData.pricing.totalTax.toFixed(2)} CAD`;
-    } else {    
-        alert("No reservation data found. Please make a reservation first.");
-    }
-
     // Add event listener to the checkout form
     document.getElementById('checkout-form').addEventListener('submit', function (event) {
         event.preventDefault();  // Prevent default form submission
@@ -39,47 +22,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Optionally, clear the form or redirect to a thank you page
         document.getElementById('checkout-form').reset();
-        window.location.href = 'thank_you.html';  // Redirect to a Thank You page after booking
+        window.location.href = 'Like.html';  // Redirect to a Thank You page after booking
     });
 
     // Handle the Cancel button click event
     document.getElementById('cancel-button').addEventListener('click', function () {
-        // Remove reservation data from localStorage
         localStorage.removeItem('reservationData');
-
-        // Alert to notify the user that the reservation has been cancelled
         alert("Reservation has been cancelled.");
-
-        // Close the current window/tab
-        window.location.href = "House.html"; // Redirect to the home page  // Closes the current tab, will not work if the page was opened by a script
+        window.location.href = "House.html";  // Redirect to the home page
     });
+
+
+    // Call this function when you want to retrieve and display the reservation data
+    getReservationData();
+    
 });
 
+function getReservationData() {
+    // Retrieve the reservation data from localStorage
+    const reservationData = localStorage.getItem('reservationData');
 
-// Function to store reservation data (you can call this after user interaction)
-function storeReservationData() {
-    // Example values for demonstration, you should replace these with actual data
-    
-    const reservationData = {
-        reservation: {
-            place,
-            numberOfNights,
-        },
-        pricing: {
-            pricePerNight,
-            cleaningFees,
-            serviceFees,
-            totalTax,
-            totalPrice
-        }
-    };
+    // Check if data exists in localStorage
+    if (reservationData) {
+        // Parse the stringified JSON data back into an object
+        const parsedData = JSON.parse(reservationData);
 
-    // Store it in localStorage as a JSON string
-    localStorage.setItem('reservationData', JSON.stringify(reservationData));
-    console.log(localStorage.getItem('reservationData'));
+        // Log the retrieved data (optional for debugging)
+        console.log("Retrieved reservation data:", parsedData);
 
-    alert('Reservation data has been stored in localStorage!');
+        // You can now use the parsedData object in your application
+        // For example, you could display it on the page or use it elsewhere
+        alert("Reservation data retrieved successfully!");
+
+        // Example: Populate some DOM elements with the retrieved data
+        document.getElementById('place').innerText = parsedData.place;
+        document.getElementById('reservation-dates').innerHTML = parsedData.numberOfNights;
+        document.getElementById('total-price').innerText = parsedData.numberOfNights * parsedData.pricePerNight;
+        document.getElementById('cleaning-fees').innerText = parsedData.cleaningFees;
+        document.getElementById('service-fees').innerText = parsedData.serviceFees;
+        document.getElementById('taxes').innerText = parsedData.totalTax;
+        document.getElementById('total-price').innerText = parsedData.totalPrice;
+
+    } else {
+        alert("No reservation data found in localStorage.");
+    }
 }
-
-// Optionally, you can call storeReservationData() directly for testing purposes
-storeReservationData();  // For now, we call this directly for demo purposes.

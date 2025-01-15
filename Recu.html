@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb-like Listing</title>
+    <link rel="stylesheet" href="Recu_Page.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="listing-container">
+        <!-- Property Info Section -->
+        <div class="property-info">
+            <h1>Oceanfront Villa</h1>
+            <p class="location">Location: Malibu, California</p>
+            <div class="property-images">
+                <img src="https://via.placeholder.com/1200x600" alt="Property Image" class="main-image">
+                <div class="thumbnail-images">
+                    <img src="https://via.placeholder.com/300x200" alt="Thumbnail 1">
+                    <img src="https://via.placeholder.com/300x200" alt="Thumbnail 2">
+                    <img src="https://via.placeholder.com/300x200" alt="Thumbnail 3">
+                </div>
+            </div>
+            <p class="description">
+                A stunning villa with panoramic ocean views, perfect for a getaway with your family or friends. Enjoy luxurious amenities and a prime location close to beaches and dining.
+            </p>
+        </div>
+
+        <!-- Reservation Section -->
+        <div class="reservation-form">
+            <h2>Check Availability</h2>
+            <div class="dates">
+                <div class="date-picker">
+                    <label for="arrival-date">Check-in</label>
+                    <input type="date" id="arrival-date" name="arrival-date">
+                </div>
+                <div class="date-picker">
+                    <label for="departure-date">Check-out</label>
+                    <input type="date" id="departure-date" name="departure-date">
+                </div>
+            </div>
+            
+            <div class="guests">
+                <label for="guests">Guests</label>
+                <input type="number" id="guests" min="1" value="1">
+            </div>
+            
+            <!-- Price Breakdown -->
+            <div class="price-breakdown">
+                <div id="nights-breakdown"></div>
+                <div id="cleaning-fees"></div>
+                <div id="service-fees"></div>
+                <div id="taxes"></div>
+                <div id="total-price"></div>
+            </div>
+
+            <button id="Reserver">Reserve</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

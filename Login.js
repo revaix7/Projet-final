@@ -10,7 +10,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const button = document.querySelector("button");
 
-// Function to handle user login using Supabase Auth
+////// Function to handle user login
 const handleLogin = async (event) => {
   event.preventDefault();  // Prevent form from submitting the default way
 
@@ -44,7 +44,9 @@ const handleLogin = async (event) => {
   }
 };
 
-// Function to store data in localStorage
+
+
+//////// Function to store data in localStorage
 function storeData(user) {
     localStorage.clear();//----------------------------------------------------------
     // Ensure the user object contains the expected properties
@@ -63,7 +65,6 @@ function storeData(user) {
     alert('Data has been stored in localStorage!');
     
 }
-
 
 // Attach the login handler to the button click event
 button.addEventListener("click", handleLogin);
