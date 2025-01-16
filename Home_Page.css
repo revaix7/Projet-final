@@ -1,3 +1,11 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
 .menu {
     margin-top: 1rem;
     display: flex;
@@ -252,6 +260,8 @@
 
 /* Slideshow container */
 .slideshow-container {
+    background-color: #717171;
+    border-radius: 10px;
     width: 16rem;
     height: 12rem;
     display: grid;
@@ -369,11 +379,29 @@
 /* Fading animation */
 .fade {
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
 }
 
 @keyframes fade {
-    from {opacity: .4}
+    from {opacity: .6}
     to {opacity: 1}
 }
 /* fin de slideshow styles -------------------------------*/
+
+.nom{
+    font-weight: bold;
+}
+
+.prix{
+    display: flex;
+    flex-direction: row;
+    ;
+    font-size: 1.1rem;
+}
+
+.prix p {
+    margin-block: 0;
+    display:flex;
+    font-weight: bolder;
+}
+
