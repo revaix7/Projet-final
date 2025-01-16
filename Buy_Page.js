@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('checkout-form').reset();
         retrieveData();  // Retrieve and display user data
         insertListingForUser();  // Now call insertListingForUser without passing parsedData
-
+        // Call this function when you want to retrieve and display the reservation data
+        getReservationData();
         window.location.href = "Recu.html";  // Redirect to the home page
     });
 
@@ -40,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert("Reservation has been cancelled.");
         window.location.href = "House.html";  // Redirect to the home page
     });
-
-    // Call this function when you want to retrieve and display the reservation data
-    getReservationData();
+ 
 });
 
 // Declare parsedData globally

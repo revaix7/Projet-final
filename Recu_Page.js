@@ -1,82 +1,75 @@
+// Initialize Supabase
 const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co'; // Replace with your URL
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4Y2Jrb2R2Y2F6cW91cmNqeGduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYyNjUxMzksImV4cCI6MjA1MTg0MTEzOX0.XW1CCPWVH_me3oPdpdXDqjgKrNTesLqBqg28WwwX4io'; // Replace with your anon key
-
-// Initialize Supabase client
 let supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 // Reference the grid where listings will be inserted
 const grid = document.getElementById('listingGrid');
-
-// Initialize userData
+let parsedData = null;
 let userData = null;
 
-// Retrieve the userData from localStorage
 function retrieveData() {
-    // Retrieve the userData from localStorage
+    // Retrieve the data from localStorage using the same key ('user')
     const storedUserData = localStorage.getItem('user');
     
+    // Ensure the data exists in localStorage
     if (storedUserData) {
-        userData = JSON.parse(storedUserData);  // Update the global userData variable
+        // Parse the JSON string back into an object
+        userData = JSON.parse(storedUserData);  // Update the global variable
+
+        // Debugging log to check the structure of userData
         console.log("Retrieved user data:", userData);  // Debugging log
-        
-        // Display the username on the page
+
+        // Access and use user data here
         const userInfoDiv = document.getElementById('user-info');
         if (userInfoDiv) {
+            // Example: Display the username on the page
             userInfoDiv.innerHTML = `Username: ${userData.username}`;
         }
     } else {
+        // If no data found in localStorage
         const userInfoDiv = document.getElementById('user-info');
         if (userInfoDiv) {
             userInfoDiv.innerHTML = 'No user data found in localStorage.';
         }
     }
 }
-document.addEventListener('DOMContentLoaded', async function () {
-    const grid = document.getElementById('listing-grid');
 
+
+async function fetchListings() {
+    const username = userData.username;  // Accessing username from userData
     try {
-        // Fetch listings from Supabase or local storage
-        const { data: listings, error } = await supabaseClient
-            .from('Compte')  // Replace with your actual Supabase table name
-            .select('title, price, image, username');
+        const { data, error } = await supabaseClient
+            .from('Compte') // Ensure this is your table name
+            .select('*') // Fetch all columns
+            .select("newListing")
+            .eq('username', username); // Filter by username
+        if (error) throw error;
 
-        if (error) {
-            throw error;
-        }
-
-        if (listings && listings.length > 0) {
-            listings.forEach(listing => {
-                // Validate the listing object
-                if (listing && typeof listing === 'object' &&
-                    typeof listing.title === 'string' &&
-                    typeof listing.price === 'number' &&
-                    typeof listing.image === 'string' &&
-                    typeof listing.username === 'string') {
-
-                    // Log the listing object to see its structure
-                    console.log('Listing object:', listing);
-
-                    // Declare the card variable here
+        // Clear the grid before injecting new listings
+        grid.innerHTML = '';
+         
+        if (Array.isArray(data) && data.length > 0) {
+            data.forEach((user) => {
+                // Parse the 'newListing' field
+                const listings = JSON.parse(user.newListing);
+                console.log(listings)
+                // Iterate over the listings inside 'newListing'
+                data.forEach(() => {
                     const card = document.createElement('div');
                     card.className = 'card';
-
                     // Fallback for missing image URLs
-                    const imageUrl = listing.image || 'https://via.placeholder.com/150';
-
-                    // Generate the card content
+                    const imageUrl = listings.image || 'https://via.placeholder.com/150';
                     card.innerHTML = `
                         <img src="${imageUrl}" alt="Property Image">
                         <div class="card-content">
-                            <h3>${listing.title}</h3>
-                            <p>${listing.username || 'Unknown Host'}</p>
-                            <p class="price">$${listing.price.toFixed(2)}</p>
+                            <h3>${listings.title}</h3>
+                            <p>${listings.location || 'No location available'}</p>
+                            <p class="price">$${listings.price}</p>
                         </div>
                     `;
-
                     // Append the card to the grid
                     grid.appendChild(card);
-                } else {
-                    console.error('Invalid listing format:', listing);
-                }
+                });
             });
         } else {
             grid.innerHTML = '<p>No listings found for this user.</p>';
@@ -85,10 +78,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error fetching listings:', error);
         grid.innerHTML = '<p>Failed to load listings. Please try again later.</p>';
     }
-});
-
-
-
-// Initialize userData first, then fetch listings
+}
 retrieveData();
 
+// Call the function to fetch and generate listings when the page loads
+fetchListings();
