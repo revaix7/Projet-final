@@ -1,9 +1,8 @@
-// Initialize Supabase
 const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co'; // Replace with your URL
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4Y2Jrb2R2Y2F6cW91cmNqeGduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYyNjUxMzksImV4cCI6MjA1MTg0MTEzOX0.XW1CCPWVH_me3oPdpdXDqjgKrNTesLqBqg28WwwX4io'; // Replace with your anon key
 
+// Initialize Supabase client
 let supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
 // Reference the grid where listings will be inserted
 const grid = document.getElementById('listingGrid');
 
@@ -31,46 +30,53 @@ function retrieveData() {
         }
     }
 }
+document.addEventListener('DOMContentLoaded', async function () {
+    const grid = document.getElementById('listing-grid');
 
-// Fetch the listings based on userData
-async function fetchListings() {
     try {
-        const { data, error } = await supabaseClient
-            .from('Compte') // Ensure this is your table name
-            .select('*') // Fetch all columns
-            .eq('username', userData.username); // Filter by username
+        // Fetch listings from Supabase or local storage
+        const { data: listings, error } = await supabaseClient
+            .from('Compte')  // Replace with your actual Supabase table name
+            .select('title, price, image, username');
 
-        if (error) throw error;
+        if (error) {
+            throw error;
+        }
 
-        // Clear the grid before injecting new listings
-        grid.innerHTML = '';
+        if (listings && listings.length > 0) {
+            listings.forEach(listing => {
+                // Validate the listing object
+                if (listing && typeof listing === 'object' &&
+                    typeof listing.title === 'string' &&
+                    typeof listing.price === 'number' &&
+                    typeof listing.image === 'string' &&
+                    typeof listing.username === 'string') {
 
-        if (Array.isArray(data) && data.length > 0) {
-            data.forEach((user) => {
-                // Access the 'newListing' field directly
-                const listing = user.newListing;
+                    // Log the listing object to see its structure
+                    console.log('Listing object:', listing);
 
-                // Ensure 'listing' is a valid object
-                // Iterate over the listings inside 'newListing'
-                listings.forEach((listing) => {
+                    // Declare the card variable here
                     const card = document.createElement('div');
                     card.className = 'card';
 
                     // Fallback for missing image URLs
                     const imageUrl = listing.image || 'https://via.placeholder.com/150';
 
+                    // Generate the card content
                     card.innerHTML = `
                         <img src="${imageUrl}" alt="Property Image">
                         <div class="card-content">
                             <h3>${listing.title}</h3>
-                            <p>${listing.location || 'No location available'}</p>
+                            <p>${listing.username || 'Unknown Host'}</p>
                             <p class="price">$${listing.price.toFixed(2)}</p>
                         </div>
                     `;
 
                     // Append the card to the grid
                     grid.appendChild(card);
-                });
+                } else {
+                    console.error('Invalid listing format:', listing);
+                }
             });
         } else {
             grid.innerHTML = '<p>No listings found for this user.</p>';
@@ -79,10 +85,10 @@ async function fetchListings() {
         console.error('Error fetching listings:', error);
         grid.innerHTML = '<p>Failed to load listings. Please try again later.</p>';
     }
-}
+});
+
+
 
 // Initialize userData first, then fetch listings
 retrieveData();
 
-// Call the function to fetch and generate listings when the page loads
-fetchListings();
