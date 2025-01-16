@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Optionally, clear the form or redirect to a thank you page
         document.getElementById('checkout-form').reset();
         insertListingForUser();  // Call the insertListingForUser function after checkout form submission
-        //window.location.href = 'Recu.html';  // Redirect to a Thank You page after booking
+        window.location.href = 'Recu.html';  // Redirect to a Thank You page after booking
     });
 
     // Handle the Cancel button click event
