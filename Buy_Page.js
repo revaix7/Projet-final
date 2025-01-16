@@ -31,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         retrieveData();  // Retrieve and display user data
         insertListingForUser();  // Now call insertListingForUser without passing parsedData
         // Call this function when you want to retrieve and display the reservation data
-        getReservationData();
-        window.location.href = "Recu.html";  // Redirect to the home page
+        //window.location.href = "Recu.html";  // Redirect to the home page
     });
 
     // Handle the Cancel button click event
@@ -41,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert("Reservation has been cancelled.");
         window.location.href = "House.html";  // Redirect to the home page
     });
+    getReservationData();
  
 });
 
