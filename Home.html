@@ -13,11 +13,16 @@
 <body>
   <header class="menu">
 
-    <div id="logo"><img src="All_img/ui_img/Airbnb_Logo.svg"></div>
-    <div id="options_div">    
+    <div id="logo"><a href="Home.html"><img src="All_img/ui_img/Airbnb_Logo.svg"></a></div>
+    <div id="options_div">
       <button id="options">
         <img id="menu_icon" src="All_img/ui_img/Burger_Menu.svg">
         <img id="profil_icon" src="All_img/ui_img/User.svg">
+        <div class="dropdown">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
       </button>
     </div>
   </header>
@@ -67,36 +72,183 @@
     <div id = "1" class="card">
       <div class="slideshow-container">
         <!-- slideshow avec images et points -->
-        <div class="mySlides fade">
+        <div class="mySlides1">
           <div class="numbertext">1 / 5</div>
-          <img src="All_img/img_House/H1/H1_1.avif" style="width:100%">
+          <img src="All_img/img_House/H1/H1_1.avif" >
         </div>
       
-        <div class="mySlides fade">
+        <div class="mySlides1">
           <div class="numbertext">2 / 5</div>
-          <img src="All_img/img_House/H1/H1_2.avif" style="width:100%">
+          <img src="All_img/img_House/H1/H1_2.avif" >
         </div>
       
-        <div class="mySlides fade">
+        <div class="mySlides1">
           <div class="numbertext">3 / 5</div>
-          <img src="All_img/img_House/H1/H1_3.avif" style="width:100%">
+          <img src="All_img/img_House/H1/H1_3.avif" >
         </div>
 
-        <div class="mySlides fade">
+        <div class="mySlides1">
           <div class="numbertext">4 / 5</div>
-          <img src="All_img/img_House/H1/H1_4.avif" style="width:100%">
+          <img src="All_img/img_House/H1/H1_4.avif" >
         </div>
 
-        <div class="mySlides fade">
+        <div class="mySlides1">
           <div class="numbertext">5 / 5</div>
-          <img src="All_img/img_House/H1/H1_5.avif" style="width:100%">
+          <img src="All_img/img_House/H1/H1_5.avif" >
         </div>
         <button class="Like">
           <span class="heart-icon">♡</span>
         </button>
         <!-- boutons pour passer entre les images -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a class="prev" onclick="plusSlides(-1,0)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1,0)">&#10095;</a>
+        <!-- les points représentant les images -->
+        <div class="indicateur_img">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+          <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+      </div>
+      <br>
+      <div class="card_desc">
+        <div class="nom">nom de maison</div>
+        <div class="prix"><p>$$$ CAD</p>&nbsp;nuit</div>
+      </div>
+    </div>
+
+    <div id = "2" class="card">
+      <div class="slideshow-container">
+        <!-- slideshow avec images et points -->
+        <div class="mySlides2">
+          <div class="numbertext">1 / 5</div>
+          <img src="All_img/img_House/H1/H1_1.avif" >
+        </div>
+      
+        <div class="mySlides2">
+          <div class="numbertext">2 / 5</div>
+          <img src="All_img/img_House/H1/H1_2.avif" >
+        </div>
+      
+        <div class="mySlides2">
+          <div class="numbertext">3 / 5</div>
+          <img src="All_img/img_House/H1/H1_3.avif" >
+        </div>
+
+        <div class="mySlides2">
+          <div class="numbertext">4 / 5</div>
+          <img src="All_img/img_House/H1/H1_4.avif" >
+        </div>
+
+        <div class="mySlides2">
+          <div class="numbertext">5 / 5</div>
+          <img src="All_img/img_House/H1/H1_5.avif" >
+        </div>
+        <button class="Like">
+          <span class="heart-icon">♡</span>
+        </button>
+        <!-- boutons pour passer entre les images -->
+        <a class="prev" onclick="plusSlides(-1,1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1,1)">&#10095;</a>
+        <!-- les points représentant les images -->
+        <div class="indicateur_img">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+          <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+      </div>
+      <br>
+      <div class="card_desc">
+        <div class="nom">nom de maison</div>
+        <div class="prix"><p>$$$ CAD</p>&nbsp;nuit</div>
+      </div>
+    </div>
+
+    <div id = "3" class="card">
+      <div class="slideshow-container">
+        <!-- slideshow avec images et points -->
+        <div class="mySlides3">
+          <div class="numbertext">1 / 5</div>
+          <img src="All_img/img_House/H1/H1_1.avif" >
+        </div>
+      
+        <div class="mySlides3">
+          <div class="numbertext">2 / 5</div>
+          <img src="All_img/img_House/H1/H1_2.avif" >
+        </div>
+      
+        <div class="mySlides3">
+          <div class="numbertext">3 / 5</div>
+          <img src="All_img/img_House/H1/H1_3.avif" >
+        </div>
+
+        <div class="mySlides3">
+          <div class="numbertext">4 / 5</div>
+          <img src="All_img/img_House/H1/H1_4.avif" >
+        </div>
+
+        <div class="mySlides3">
+          <div class="numbertext">5 / 5</div>
+          <img src="All_img/img_House/H1/H1_5.avif" >
+        </div>
+        <button class="Like">
+          <span class="heart-icon">♡</span>
+        </button>
+        <!-- boutons pour passer entre les images -->
+        <a class="prev" onclick="plusSlides(-1,2)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1,2)">&#10095;</a>
+        <!-- les points représentant les images -->
+        <div class="indicateur_img">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+          <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+      </div>
+      <br>
+      <div class="card_desc">
+        <div class="nom">nom de maison</div>
+        <div class="prix"><p>$$$ CAD</p>&nbsp;nuit</div>
+      </div>
+    </div>
+
+    <div id = "4" class="card">
+      <div class="slideshow-container">
+        <!-- slideshow avec images et points -->
+        <div class="mySlides4">
+          <div class="numbertext">1 / 5</div>
+          <img src="All_img/img_House/H1/H1_1.avif" >
+        </div>
+      
+        <div class="mySlides4">
+          <div class="numbertext">2 / 5</div>
+          <img src="All_img/img_House/H1/H1_2.avif" >
+        </div>
+      
+        <div class="mySlides4">
+          <div class="numbertext">3 / 5</div>
+          <img src="All_img/img_House/H1/H1_3.avif" >
+        </div>
+
+        <div class="mySlides4">
+          <div class="numbertext">4 / 5</div>
+          <img src="All_img/img_House/H1/H1_4.avif" >
+        </div>
+
+        <div class="mySlides4">
+          <div class="numbertext">5 / 5</div>
+          <img src="All_img/img_House/H1/H1_5.avif" >
+        </div>
+        <button class="Like">
+          <span class="heart-icon">♡</span>
+        </button>
+        <!-- boutons pour passer entre les images -->
+        <a class="prev" onclick="plusSlides(-1,3)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1,3)">&#10095;</a>
         <!-- les points représentant les images -->
         <div class="indicateur_img">
           <span class="dot" onclick="currentSlide(1)"></span>

@@ -7,6 +7,54 @@ body {
     color: #333;
 }
 
+/*styles de header menu*/
+.menu {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* styles de div logo*/
+#logo img {
+    margin-left: 6rem;
+    height: 1.9rem;
+    filter: grayscale() brightness(0%);
+}
+
+#logo :hover {
+    cursor: pointer;
+    filter: saturate(200%);
+}
+
+/* styles de div options*/
+#options {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 6rem;
+    height: 2.7rem;
+    width: 5.5rem;
+    background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 9999px;
+    border-color: rgb(168, 168, 168);
+}
+
+#options_div :hover{
+    box-shadow: 0px 2px 3px 0px #a8a8a8;
+}
+#menu_icon {
+    height: 0.9rem;
+    margin-left: 0;
+}
+
+#profil_icon{
+    height: 1.8rem;
+    filter: opacity(0.6);
+}
+
 /* Search Bar Styles */
 .search-bar {
     display: flex;
