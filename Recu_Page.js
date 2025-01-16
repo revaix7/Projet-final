@@ -6,14 +6,39 @@ let supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Reference the grid where listings will be inserted
 const grid = document.getElementById('listingGrid');
-const username = "as2"; // Use the username for the user you're querying
 
+// Initialize userData
+let userData = null;
+
+// Retrieve the userData from localStorage
+function retrieveData() {
+    // Retrieve the userData from localStorage
+    const storedUserData = localStorage.getItem('user');
+    
+    if (storedUserData) {
+        userData = JSON.parse(storedUserData);  // Update the global userData variable
+        console.log("Retrieved user data:", userData);  // Debugging log
+        
+        // Display the username on the page
+        const userInfoDiv = document.getElementById('user-info');
+        if (userInfoDiv) {
+            userInfoDiv.innerHTML = `Username: ${userData.username}`;
+        }
+    } else {
+        const userInfoDiv = document.getElementById('user-info');
+        if (userInfoDiv) {
+            userInfoDiv.innerHTML = 'No user data found in localStorage.';
+        }
+    }
+}
+
+// Fetch the listings based on userData
 async function fetchListings() {
     try {
         const { data, error } = await supabaseClient
             .from('Compte') // Ensure this is your table name
             .select('*') // Fetch all columns
-            .eq('username', username); // Filter by username
+            .eq('username', userData.username); // Filter by username
 
         if (error) throw error;
 
@@ -22,9 +47,10 @@ async function fetchListings() {
 
         if (Array.isArray(data) && data.length > 0) {
             data.forEach((user) => {
-                // Parse the 'newListing' field
-                const listings = JSON.parse(user.newListing);
+                // Access the 'newListing' field directly
+                const listing = user.newListing;
 
+                // Ensure 'listing' is a valid object
                 // Iterate over the listings inside 'newListing'
                 listings.forEach((listing) => {
                     const card = document.createElement('div');
@@ -55,6 +81,8 @@ async function fetchListings() {
     }
 }
 
+// Initialize userData first, then fetch listings
+retrieveData();
+
 // Call the function to fetch and generate listings when the page loads
 fetchListings();
-
