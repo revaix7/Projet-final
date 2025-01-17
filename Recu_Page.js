@@ -84,7 +84,7 @@ async function fetchListings() {
                                 <h3>${listing.title}</h3>
                                 <p>${listing.username || 'Unknown Host'}</p>
                                 <p>De ${listing.arrival || "01/13/2025"}<p>
-                                <p>A ${listing.departure|| "01/18/2025"}<p>
+                                <p>Au ${listing.departure|| "01/18/2025"}<p>
                                 <p class="price">$${listing.price.toFixed(2)}</p>
                             </div>
                         `;
