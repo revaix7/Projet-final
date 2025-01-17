@@ -53,36 +53,48 @@ body {
     filter: opacity(0.6);
 }
   
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown {
+/* Dropdown Content (Hidden by Default) */
+.dropdown1 {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    font-family: Arial, sans-serif; /* Apply Arial font to the dropdown */
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 200px; /* Adds space above the logout link */
   }
   
-  /* liens dans dropdown */
-  .dropdown a {
+  /* Links inside the dropdown */
+  .dropdown1 a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    font-family: Arial, sans-serif; /* Apply Arial font to the links */
+    font-size: 14px;
+    font-weight: normal;
   }
   
-  /* Change couleur du dropdown when hover */
-  .dropdown a:hover {background-color: #f1f1f1}
+  /* Change the color of links in the dropdown on hover */
+  .dropdown1 a:hover {
+    background-color: #f1f1f1;
+  }
   
-  /* montre le dropdown menu when hover */
-  #options:hover .dropdown {
+  /* Show the dropdown menu when hovering on the options button */
+  #options:hover .dropdown1 {
     display: block;
   }
   
-  /* Change le background color du bouton quand hover*/
+  /* Change the background color of the options button when hovered */
   #options:hover .options {
-    background-color:rgb(158, 158, 158);
+    background-color: rgb(158, 158, 158);
   }
+  
+  
+  
 /* Search Bar Styles----------------------------------------------------*/
 .search-bar {
     display: flex;
@@ -156,6 +168,7 @@ body {
     margin-top: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    position: absolute;
 }
 
 /* Button Styles */

@@ -64,3 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   });
 });
+
+ function logout() {
+    localStorage.clear();
+    alert("You have been logged out.");
+ }
