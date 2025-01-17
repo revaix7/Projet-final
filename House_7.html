@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar</title>
+    <link rel="stylesheet" href="House_Page.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header class="menu">
+        <div id="logo"><a href="Home.html"><img src="All_img/ui_img/Airbnb_Logo.svg"></a></div>
+        <div id="options_div">    
+            <button id="options">
+                <img id="menu_icon" src="All_img/ui_img/Burger_Menu.svg">
+                <img id="profil_icon" src="All_img/ui_img/User.svg">
+                <div class="dropdown1">
+                  <a href="Login.html">login</a>
+                  <a href="Signup.html">singup</a>
+                  <a href="javascript:void(0);" onclick="logout()">logout</a>
+                  <a href="Recu.html">Recu</a>
+                </div>
+              </button>
+        </div>
+    </header>
+    <header>
+        <div class="search-bar">
+            <div class="location-container">
+                <label for="location">Où</label>
+                <input type="text" id="location" placeholder="États-Unis" oninput="filterLocations()" autocomplete="off">
+                <div id="location-dropdown" class="dropdown">
+                    <div class="dropdown-item" onclick="selectLocation('États-Unis')">
+                        <img src="All_img/flag/us.jpg" alt="USA flag" class="dropdown-icon"> États-Unis
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('France')">
+                        <img src="All_img/flag/France.png" alt="France flag" class="dropdown-icon"> France
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('Canada')">
+                        <img src="All_img/flag/Canada.png" alt="Canada flag" class="dropdown-icon"> Canada
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('Italy')">
+                        <img src="All_img/flag/italy.png" alt="Italy flag" class="dropdown-icon"> Italy
+                    </div>
+                    <div class="dropdown-item" onclick="selectLocation('Germany')">
+                        <img src="All_img/flag/german.png" alt="Germany flag" class="dropdown-icon"> Germany
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="arrival">Arrivée</label>
+                <input type="date" id="arrival">
+            </div>
+            <div>
+                <label for="departure">Départ</label>
+                <input type="date" id="departure">
+            </div>
+            <div>
+                <label for="guests">Qui</label>
+                <input type="text" id="guests" placeholder="Qui vient?">
+            </div>
+            <button type="button">
+                <svg>
+                </svg>
+            </button>
+        </div>
+        
+    </header>
+
+    <div>
+        <div id="titre">
+            <h1 id="place">Château bavarois avec étang, jacuzzi et salle de jeux</h1>
+            <button class="Like">
+                <span class="heart-icon">♡</span> Like
+            </button>
+        </div>
+        <div class="image-gallery">
+            <div class="main-image">
+                <img src="All_img/img_House/H7/H7_1.avif" alt="H1_1">
+            </div>
+            <div class="thumbs">
+                <div class="thumb-row">
+                    <img src="All_img/img_House/H7/H7_2.avif" alt="H1_2">
+                    <img src="All_img/img_House/H7/H7_3.avif" alt="H1_3" id="H_3">
+                </div>
+                <div class="thumb-row">
+                    <img src="All_img/img_House/H7/H7_4.avif" alt="H1_4">
+                    <img src="All_img/img_House/H7/H7_5.avif" alt="H1_5" id="H_5">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="property-container">
+        <div class="property-info">
+            <h2>Château · Irasburg, Vermont, États-Unis</h2>
+            <p>7 voyageurs 6 chambres 7 lits 4 salles de bain</p>
+            <div class="property-details">
+                <div>
+                    <span>Coup de cœur voyageurs</span>
+                    <span>C'est un des logements préférés des voyageurs sur Airbnb</span>
+                    <div>4,4 ★ · 324 commentaires</div>
+                </div>
+                <div>
+                    <h4>Votre hôte : Breathe Vacation Rentals</h4>
+                    <p>Superhôte · 8 ans comme hôte</p>
+                </div>
+            </div>
+            <div class="features">
+                <p>Wifi rapide : Avec 162 Mbit/s, vous pouvez participer à des appels vidéo et regarder des vidéos en continu.</p>
+                <p>Arrivée autonome : Vous pouvez entrer dans les lieux à l'aide d'une serrure intelligente.</p>
+                <p>Les Superhôtes sont des hôtes expérimentés et très bien notés.</p>
+            </div>
+        </div>
+
+        <div class="reservation-section">
+            <div class="reservation-card">
+                <div class="price">
+                    <span class="price_1" id="price">1065$ CAD</span> <span>/ nuit</span>
+                </div>
+                <div class="dates">
+                    <div>
+                        <label>Arrivée</label>
+                        <input type="date" id="arrival-date" value="2025-01-13" onchange="updatePrice()">
+                    </div>
+                    <div>
+                        <label>Départ</label>
+                        <input type="date" id="departure-date" value="2025-01-18" onchange="updatePrice()">
+                    </div>
+                </div>
+                <div>
+                    <label>Voyageurs</label>
+                    <select id="guest" onchange="updatePrice()">
+                        <option>1 voyageur</option>
+                        <option>2 voyageurs</option>
+                        <option>3 voyageurs</option>
+                        <option>4 voyageurs</option>
+                    </select>
+                </div>
+                <button id = "Reserver">Réserver</button>
+                <p class="note">Vous ne payez pas la réservation tout de suite</p>
+                <div class="breakdown">
+                    <p id="nights-breakdown">1065$ CAD x 5 nuits <span id="total-night-price">1 552$ CAD</span></p>
+                    <p>Frais de nettoyage <span id="cleaning-fees">450$ CAD</span></p>
+                    <p>Frais de service Airbnb <span id="service-fees">290$ CAD</span></p>
+                    <p>Taxes <span id="taxes">107$ CAD</span></p>
+                </div>
+                <div class="total">
+                    <p>Total <span id="total-price"></span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="House_7_Page.js"></script>
+</body>
+</html>

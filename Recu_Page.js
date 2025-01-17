@@ -63,7 +63,9 @@ async function fetchListings() {
                         typeof listing.title === 'string' &&
                         typeof listing.price === 'number' &&
                         typeof listing.image === 'string' &&
-                        typeof listing.username === 'string') {
+                        typeof listing.username === 'string' &&
+                        typeof listing.departure === "string" &&
+                        typeof listing.arrival === "string") {
 
                         // Consignez l’objet de liste pour voir sa structure
                         console.log('Listing object:', listing);
@@ -81,6 +83,8 @@ async function fetchListings() {
                             <div class="card-content">
                                 <h3>${listing.title}</h3>
                                 <p>${listing.username || 'Unknown Host'}</p>
+                                <p>De ${listing.arrival || "01/13/2025"}<p>
+                                <p>A ${listing.departure|| "01/18/2025"}<p>
                                 <p class="price">$${listing.price.toFixed(2)}</p>
                             </div>
                         `;

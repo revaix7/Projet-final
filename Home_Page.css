@@ -300,6 +300,7 @@ body {
     display: flex;
     justify-content: center;
     z-index: 1;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -330,7 +331,11 @@ body {
 .mySlides1,
 .mySlides2,
 .mySlides3,
-.mySlides4 {
+.mySlides4,
+.mySlides5,
+.mySlides6,
+.mySlides7,
+.mySlides8 {
     border-radius: 10px;
     width: auto;
     height: 100%;
@@ -341,7 +346,11 @@ body {
 .mySlides1 img,
 .mySlides2 img,
 .mySlides3 img,
-.mySlides4 img {
+.mySlides4 img,
+.mySlides5 img,
+.mySlides6 img,
+.mySlides7 img,
+.mySlides8 img {
     width: auto;
     height: 100%;
     object-fit: cover;

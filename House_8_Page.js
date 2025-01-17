@@ -47,9 +47,9 @@ function selectLocation(location) {
 }
 
 ////////// Constantes de prix
-const pricePerNight = 890;  // Prix par nuit en CAD
-const cleaningFees = 450;   // Frais de nettoyage fixes
-const serviceFees = 290;    // Frais de service fixes
+const pricePerNight = 7176;  // Prix par nuit en CAD
+const cleaningFees = 1632;   // Frais de nettoyage fixes
+const serviceFees = 1490;    // Frais de service fixes
 const taxRate = 0.13;       // Taux de taxe (13%)
 
 ////////// Fonction de mise à jour du prix
@@ -114,7 +114,7 @@ function storeReservationData() {
     const serviceFees = parseFloat(serviceFeesElement.innerText);
     const totalTax = parseFloat(taxElement.innerText);
     const totalPrice = parseFloat(document.getElementById('total-price').innerText);
-    const imageUrl = "All_img/img_House/H4/H4_1.avif";
+    const imageUrl = "All_img/img_House/H8/H8_1.avif";
 
     // Assurez-vous que les éléments existent avant de continuer
     if (!arrivalDateElement || !departureDateElement || !pricePerNightElement || !tnpElement || !cleaningFeesElement || !serviceFeesElement) {

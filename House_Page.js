@@ -128,6 +128,8 @@ function storeReservationData() {
 
     // Préparez l'objet de données de réservation
     const reservationData = {
+        arrival: arrival,
+        departure: departure,
         place: place,               // Utilisez l'emplacement du DOM
         numberOfNights: numberOfNights,  // Utilisez le nombre calculé de nuits
         pricePerNight: pricePerNight,

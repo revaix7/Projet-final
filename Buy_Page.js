@@ -77,6 +77,14 @@ function getReservationData() {
     }
 }
 
+function formatDate(date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(d.getDate()+1).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 async function insertListingForUser() {
     if (!userData || !parsedData) {
         console.error('Données utilisateur ou données de réservation manquantes');
@@ -87,10 +95,15 @@ async function insertListingForUser() {
     const totalPrice = parsedData.totalPrice;
     const username = userData.username;  // Accéder au nom d'utilisateur depuis userData
     const imageUrl = parsedData.imageUrl;
+    const arrival = formatDate(parsedData.arrival);
+    const departure = formatDate(parsedData.departure);
+
     console.log("Nom d'utilisateur :", username);
 
     // Exemple de données pour une nouvelle annonce
     const newListing = {
+        arrival: arrival,
+        departure: departure,
         title: place,
         price: totalPrice,
         image: imageUrl,
