@@ -1,4 +1,4 @@
-/* Body Styles */
+/* Styles du corps */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -7,7 +7,7 @@ body {
     color: #333;
 }
 
-/*styles de header menu*/
+/* styles du menu du header */
 .menu {
     margin-top: 1rem;
     display: flex;
@@ -15,7 +15,7 @@ body {
     justify-content: space-between;
 }
 
-/* styles de div logo*/
+/* styles du div logo */
 #logo img {
     margin-left: 6rem;
     height: 1.9rem;
@@ -27,7 +27,7 @@ body {
     filter: saturate(200%);
 }
 
-/* styles de div options*/
+/* styles du div options */
 #options {
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@ body {
     filter: opacity(0.6);
 }
 
-/* Dropdown Content (Hidden by Default) */
+/* Contenu du menu déroulant (caché par défaut) */
 .dropdown1 {
     display: none;
     position: absolute;
@@ -63,40 +63,39 @@ body {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    font-family: Arial, sans-serif; /* Apply Arial font to the dropdown */
+    font-family: Arial, sans-serif; /* Appliquer la police Arial au menu déroulant */
     font-size: 14px;
     font-weight: normal;
-    margin-top: 200px; /* Adds space above the logout link */
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown1 a {
+    margin-top: 200px; /* Ajoute de l'espace au-dessus du lien de déconnexion */
+}
+
+/* Liens à l'intérieur du menu déroulant */
+.dropdown1 a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    font-family: Arial, sans-serif; /* Apply Arial font to the links */
+    font-family: Arial, sans-serif; /* Appliquer la police Arial aux liens */
     font-size: 14px;
     font-weight: normal;
-  }
-  
-  /* Change the color of links in the dropdown on hover */
-  .dropdown1 a:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Show the dropdown menu when hovering on the options button */
-  #options:hover .dropdown1 {
-    display: block;
-  }
-  
-  /* Change the background color of the options button when hovered */
-  #options:hover .options {
-    background-color: rgb(158, 158, 158);
-  }
-  
+}
 
-/* Search Bar Styles */
+/* Changer la couleur des liens dans le menu déroulant au survol */
+.dropdown1 a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Afficher le menu déroulant lors du survol du bouton options */
+#options:hover .dropdown1 {
+    display: block;
+}
+
+/* Changer la couleur de fond du bouton options au survol */
+#options:hover .options {
+    background-color: rgb(158, 158, 158);
+}
+
+/* Styles de la barre de recherche */
 .search-bar {
     display: flex;
     justify-content: space-between;
@@ -104,57 +103,57 @@ body {
     margin: 20px auto;
     padding: 12px 16px;
     background-color: rgba(255, 255, 255, 0);
-    border-radius: 30px; /* Softer rounded edges like AirBnB */
+    border-radius: 30px; /* Coins arrondis plus doux comme AirBnB */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     width: 100%;
     transition: box-shadow 0.3s ease;
 }
 
-/* Hover effect for search bar */
+/* Effet de survol pour la barre de recherche */
 .search-bar:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Input fields container */
+/* Conteneur des champs de saisie */
 .search-bar div {
     display: flex;
     flex-direction: column;
-    margin-right: 16px; /* Space between input fields */
+    margin-right: 16px; /* Espace entre les champs de saisie */
 }
 
-/* Label Styles */
+/* Styles des labels */
 .search-bar div label {
     font-size: 12px;
     color: #717171;
     margin-bottom: 5px;
 }
 
-/* Input Styles */
+/* Styles des champs de saisie */
 .search-bar input[type="text"],
 .search-bar input[type="date"] {
     border: none;
     outline: none;
     font-size: 14px;
     padding: 10px 12px;
-    border-radius: 25px; /* More rounded input fields */
+    border-radius: 25px; /* Champs de saisie avec coins plus arrondis */
     background-color: #f7f7f700;
     transition: all 0.3s ease;
 }
 
-/* Placeholder text styling */
+/* Styliser le texte du placeholder */
 .search-bar input[type="text"]::placeholder {
     color: #b0b0b0;
 }
 
-/* Focused input fields */
+/* Champs de saisie au focus */
 .search-bar input[type="text"]:focus,
 .search-bar input[type="date"]:focus {
-    border-color: #ff385c; /* Highlight on focus */
-    box-shadow: 0 0 8px rgba(255, 56, 92, 0.4); /* Soft glow effect */
+    border-color: #ff385c; /* Mise en surbrillance au focus */
+    box-shadow: 0 0 8px rgba(255, 56, 92, 0.4); /* Effet de halo doux */
 }
 
-/* Datalist styling (Dropdown for "location") */
+/* Stylisation de la datalist (menu déroulant pour "location") */
 #location-options {
     width: 100%;
     font-size: 14px;
@@ -166,33 +165,32 @@ body {
     z-index: 10;
 }
 
-/* Button Styles */
+/* Styles des boutons */
 .search-bar button {
     background-color: #ff385c;
     color: white;
     border: none;
-    padding: 12px 20px; /* Larger padding for better button size */
+    padding: 12px 20px; /* Padding plus grand pour une meilleure taille de bouton */
     font-size: 14px;
-    border-radius: 25px; /* Rounded button similar to the inputs */
+    border-radius: 25px; /* Bouton arrondi comme les champs de saisie */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    text-transform: uppercase; /* Make the text bold and consistent with AirBnB style */
+    text-transform: uppercase; /* Texte en majuscules comme dans le style AirBnB */
     height: 30px;
     width: 30px;
 }
 
-/* Hover effect for button */
+/* Effet de survol pour le bouton */
 .search-bar button:hover {
-    background-color: #e20f45; /* Darken the button color on hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+    background-color: #e20f45; /* Assombrir la couleur du bouton au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
 }
 
-
-/* Responsive Adjustments for smaller screens */
+/* Ajustements réactifs pour les petits écrans */
 @media (max-width: 768px) {
     .search-bar {
         flex-direction: column;
@@ -203,15 +201,16 @@ body {
 
     .search-bar div {
         margin-right: 0;
-        margin-bottom: 16px; /* Space between fields for mobile */
+        margin-bottom: 16px; /* Espace entre les champs pour mobile */
     }
 
     .search-bar button {
-        width: 100%; /* Full width button on mobile */
+        width: 100%; /* Bouton pleine largeur sur mobile */
         height: 45px;
     }
 }
-/* Dropdown container */
+
+/* Conteneur du menu déroulant */
 .location-container {
     position: relative;
 }
@@ -226,7 +225,7 @@ body {
     background-color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    display: none; /* Hidden initially */
+    display: none; /* Caché par défaut */
 }
 
 .dropdown-item {
@@ -242,17 +241,17 @@ body {
 
 .dropdown-item img {
     margin-right: 10px;
-    width: 20px; /* Size of the icon */
-    height: 20px; /* Size of the icon */
-    border-radius: 50%; /* Optional: makes the image round */
+    width: 20px; /* Taille de l'icône */
+    height: 20px; /* Taille de l'icône */
+    border-radius: 50%; /* Optionnel : rend l'image ronde */
 }
 
-/* Show the dropdown when the input field is focused */
+/* Afficher le menu déroulant lorsque le champ de saisie est en focus */
 #location:focus + #location-dropdown {
     display: block;
 }
 
-/* Optional: style the input field to look clean */
+/* Optionnel : styliser le champ de saisie pour qu'il soit propre */
 #location {
     padding: 10px;
     font-size: 14px;
@@ -263,36 +262,42 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Hover and focus effects for the input */
+/* Effets de survol et de focus pour le champ de saisie */
 #location:hover,
 #location:focus {
     border-color: #ff385c;
     box-shadow: 0 0 8px rgba(255, 56, 92, 0.4);
 }
-/* fin de search bar styles---------------------------------------------*/
 
+/* fin des styles de la barre de recherche---------------------------------------------*/
+
+/* Titre */
 h1 {
     display: flex;
     justify-content: left;
     font-size: 26px;
-    padding-left: 7%; /* Add left padding */
-    margin: 0; /* Remove default margin */
+    margin: 0; /* Supprimer la marge par défaut */
 }
 
-/* Styling for the Like button */
+#titre{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Stylisation du bouton Like */
 .Like {
     width: 50px;
     background: none;
     border: none;
     font-size: 16px;
-    color: #ff385c; /* Heart color */
+    color: #ff385c; /* Couleur du cœur */
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between the heart icon and text */
+    gap: 8px; /* Espace entre l'icône du cœur et le texte */
     transition: transform 0.2s ease, color 0.3s ease;
 }
-
 
 .Like:active {
     transform: scale(0.999);
@@ -300,89 +305,88 @@ h1 {
 
 .heart-icon {
     font-size: 20px;
-    color: #ff385c; /* Default color */
+    color: #ff385c; /* Couleur par défaut du cœur */
     transition: color 0.3s ease;
 }
 
 .heart-icon.filled {
-    color: #e83257; /* Filled heart color */
+    color: #e83257; /* Couleur du cœur rempli */
 }
 
-
-/* Container for the gallery */
+/* Conteneur pour la galerie */
 .image-gallery {
     display: flex;
-    gap: 8px;  /* Increased space between large image and thumbnails */
+    gap: 8px;  /* Espace augmenté entre l'image principale et les vignettes */
     justify-content: center;
     align-items: flex-start;
 }
 
-/* Style for the main large image */
+/* Style pour l'image principale */
 .main-image img {
-    width: 100%;  /* Ensure it scales properly */
-    max-width: 600px;  /* Increased max-width for the large image */
-    height: 500px;  /* Increased height of the large image */
-    object-fit: cover;  /* Ensures the image covers the space without distortion */
-    border-radius: 10px 0px 0px 10px ;  /* Slightly larger rounded corners */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);  /* Increased shadow for more depth */
+    width: 100%;  /* Assurer une bonne mise à l'échelle */
+    max-width: 600px;  /* Augmenter la largeur maximale pour l'image principale */
+    height: 500px;  /* Augmenter la hauteur de l'image principale */
+    object-fit: cover;  /* Assurer que l'image couvre l'espace sans distorsion */
+    border-radius: 10px 0px 0px 10px ;  /* Coins légèrement plus arrondis */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);  /* Ombre plus marquée pour plus de profondeur */
 }
 
-/* Container for thumbnail images */
+/* Conteneur pour les vignettes */
 .thumbs {
     display: flex;
     flex-direction: column;
-    gap: 8px;  /* Increased space between the rows of thumbnails */
+    gap: 8px;  /* Espace augmenté entre les rangées de vignettes */
 }
 
-/* Each row of thumbnails */
+/* Chaque rangée de vignettes */
 .thumb-row {
     display: flex;
-    gap: 8px;  /* Increased space between the two images in each row */
+    gap: 8px;  /* Espace augmenté entre les deux images dans chaque rangée */
 }
 
-/* Style for the thumbnail images */
+/* Style pour les vignettes */
 .thumb-row img {
     width: 100%;
-    max-width: 275px; /* Increased max-width for the small images */
-    height: 246px;  /* Increased height for the small images */
-    object-fit: cover;  /* Ensures the image covers the space without distortion */
-    cursor: pointer;  /* Indicate that the small images are clickable */
+    max-width: 275px; /* Augmenter la largeur maximale pour les petites images */
+    height: 246px;  /* Augmenter la hauteur pour les petites images */
+    object-fit: cover;  /* Assurer que l'image couvre l'espace sans distorsion */
+    cursor: pointer;  /* Indiquer que les petites images sont cliquables */
     transition: transform 0.3s ease-in-out;
 }
 
-/* Hover effect for small images */
+/* Effet de survol pour les petites images */
 .thumb-row img:hover {
-    color: 0 6px 15px rgba(0, 0, 0, 0.173);  /* Increased shadow on hover */
+    color: 0 6px 15px rgba(0, 0, 0, 0.173);  /* Ombre plus marquée au survol */
 }
 
 #H_3{
-    border-radius: 0px 10px 0px 0px ;  /* Slightly larger rounded corners */
+    border-radius: 0px 10px 0px 0px ;  /* Coins légèrement plus arrondis */
 }
 #H_5{
-    border-radius: 0px 0px 10px 0px ;  /* Slightly larger rounded corners */
+    border-radius: 0px 0px 10px 0px ;  /* Coins légèrement plus arrondis */
 }
 
-/* Responsive design adjustments */
+/* Ajustements pour la conception réactive */
 @media (max-width: 768px) {
     .image-gallery {
-        flex-direction: column;  /* Stack the large and small images vertically */
+        flex-direction: column;  /* Empiler les grandes et petites images verticalement */
         align-items: center;
     }
 
     .main-image img {
-        max-width: 100%;  /* Make the large image full-width on small screens */
-        height: 320px;  /* Ensure height is maintained */
+        max-width: 100%;  /* Rendre l'image principale pleine largeur sur petits écrans */
+        height: 320px;  /* Assurer que la hauteur est maintenue */
     }
 
     .thumbs {
         flex-direction: row;
         gap: 25px;
-        justify-content: center;  /* Align the thumbs horizontally on smaller screens */
+        justify-content: center;  /* Aligner les vignettes horizontalement sur petits écrans */
     }
 
     .thumb-row img {
-        max-width: 100px;  /* Adjust max-width of small images on mobile */
-        height: 100px;  /* Adjust height for small images on mobile */
+        max-width: 100px;  /* Ajuster la largeur maximale des petites images sur mobile */
+        height: 100px;  /* Ajuster la hauteur des petites images sur mobile */
     }
 }
 

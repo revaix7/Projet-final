@@ -8,17 +8,30 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" ></script>
 </head>
 <body>
-  <header>
-    <h1>Recu</h1>
-    <nav>
-      <a href="Home.html">Home</a>
-      <a href="#">Profile</a>
-    </nav>
+  <header class="menu">
+
+    <div id="logo"><a href="Home.html"><img src="All_img/ui_img/Airbnb_Logo.svg"></a></div>
+    <div id="options_div">
+      <button id="options">
+        <img id="menu_icon" src="All_img/ui_img/Burger_Menu.svg">
+        <img id="profil_icon" src="All_img/ui_img/User.svg">
+        <div class="dropdown1">
+          <a href="Login.html">login</a>
+          <a href="Signup.html">singup</a>
+          <a href="javascript:void(0);" onclick="logout()">logout</a>
+          <a href="Recu.html">Recu</a>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <header class="titre">
+    <h1>Recus</h1>
   </header>
 
   <div class="container">
     <div class="grid" id="listingGrid">
-      <!-- Dynamic Listings Will Be Injected Here -->
+      <!-- Les items dynamiques seront ajoutés ici -->
     </div>
   </div>
 

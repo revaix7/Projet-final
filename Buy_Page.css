@@ -1,4 +1,4 @@
-/* Basic Reset */
+/* Réinitialisation de base */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
 }
 
-/* Container Styling */
+/* Style du conteneur */
 .checkout-container {
     background-color: white;
     padding: 20px;
@@ -24,13 +24,13 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
+/* En-tête */
 .checkout-header h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Reservation Summary */
+/* Résumé de la réservation */
 .reservation-summary {
     margin-bottom: 20px;
 }
@@ -42,55 +42,53 @@ body {
 }
 
 .reservation-summary p {
-    margin: 5px 0;
+    margin-bottom: 10px;
+    color: #555;
 }
 
-/* Billing Information Form */
-.billing-info {
-    margin-bottom: 20px;
+/* Informations de facturation */
+.billing-info h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #333;
 }
 
 .billing-info label {
     display: block;
-    margin-top: 10px;
-    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
 }
 
 .billing-info input {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1em;
 }
 
-.billing-info button {
-    background-color: #ff5a5f;
-    color: white;
-    padding: 15px;
+/* Boutons */
+button {
     width: 100%;
+    padding: 10px;
     border: none;
     border-radius: 4px;
-    font-size: 1.2em;
+    font-size: 1em;
     cursor: pointer;
 }
 
-.billing-info button:hover {
-    background-color: #e74c3c;
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    margin-bottom: 10px;
 }
 
-/* Footer */
-.checkout-footer {
-    text-align: center;
-    font-size: 0.9em;
+button[type="button"] {
+    background-color: #f44336;
+    color: white;
 }
 
-.checkout-footer a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.checkout-footer a:hover {
-    text-decoration: underline;
+/* Ajouter un peu d'espace entre les boutons */
+button + button {
+    margin-top: 10px;
 }

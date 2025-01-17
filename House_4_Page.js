@@ -1,3 +1,5 @@
+// Bouton cœur
+
 document.addEventListener("DOMContentLoaded", function () {
     const likeButton = document.querySelector(".Like");
 
@@ -7,14 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
         // Basculez la classe "filled" sur l'icône du cœur
         if (heartIcon.classList.contains("filled")) {
             heartIcon.classList.remove("filled");
-            heartIcon.textContent = "♡"; // Cœur non rempli
+            heartIcon.textContent = "♡"; // Cœur contour
         } else {
             heartIcon.classList.add("filled");
             heartIcon.textContent = "♥"; // Cœur rempli
         }
     });
 });
-// Appelez la fonction lorsque la page se charge pour initialiser le prix
+// Appelez la fonction lorsque la page est chargée pour initialiser le prix
 document.addEventListener('DOMContentLoaded', updatePrice);
 
 ////////// Dropdown
@@ -44,15 +46,15 @@ function selectLocation(location) {
     document.getElementById('location-dropdown').style.display = 'none'; // Cacher le dropdown
 }
 
-////////// Constantes des prix
-const pricePerNight = 310;  // Prix par nuit en CAD
-const cleaningFees = 350;   // Frais de nettoyage fixes
-const serviceFees = 269;    // Frais de service fixes
+////////// Constantes de prix
+const pricePerNight = 890;  // Prix par nuit en CAD
+const cleaningFees = 450;   // Frais de nettoyage fixes
+const serviceFees = 290;    // Frais de service fixes
 const taxRate = 0.13;       // Taux de taxe (13%)
 
 ////////// Fonction de mise à jour du prix
 function updatePrice() {
-    // Obtenez les dates d'arrivée et de départ
+    // Obtenir les dates d'arrivée et de départ
     const arrivalDate = document.getElementById('arrival-date').value;
     const departureDate = document.getElementById('departure-date').value;
     const arrival = new Date(arrivalDate);
@@ -65,16 +67,16 @@ function updatePrice() {
     const totalTax = totalNightPrice * taxRate;
     const totalPrice = totalNightPrice + cleaningFees + serviceFees + totalTax;
 
-    // Obtenez le nombre d'invités (peut être utilisé pour modifier le prix si nécessaire)
+    // Obtenir le nombre de personnes (peut être utilisé pour modifier le prix si nécessaire)
     const guests = document.getElementById('guests').value;
     
-    // Assurez-vous que le séjour dure au moins 1 nuit
+    // S'assurer qu'au moins 1 nuit est sélectionnée
     if (numberOfNights < 1) {
         alert("La durée de votre séjour doit être d'au moins 1 nuit.");
         return;
     }
 
-    // Mettre à jour la répartition des prix
+    // Mettre à jour le détail du prix
     document.getElementById('nights-breakdown').innerHTML = `${pricePerNight}$ CAD x ${numberOfNights} nuits <span id="total-night-price">${totalNightPrice}$ CAD</span>`;
     document.getElementById('total-price').innerHTML = `${totalPrice.toFixed(2)}$ CAD`;
     document.getElementById('cleaning-fees').innerText = `${cleaningFees}$ CAD`;
@@ -87,10 +89,10 @@ document.getElementById('arrival-date').addEventListener('change', updatePrice);
 document.getElementById('departure-date').addEventListener('change', updatePrice);
 document.getElementById('guests').addEventListener('change', updatePrice);
 
-////////// Fonction pour stocker les données de réservation
+////////// Fonction de stockage des données de réservation
 function storeReservationData() {
     
-    // Obtenez les champs du formulaire
+    // Obtenez les entrées du formulaire
     const arrivalDateElement = document.getElementById('arrival-date').value;
     const departureDateElement = document.getElementById('departure-date').value;
     const pricePerNightElement = document.getElementById('price');
@@ -99,37 +101,37 @@ function storeReservationData() {
     const serviceFeesElement = document.getElementById('service-fees');
     const taxElement = document.getElementById('taxes');
 
-    // Parse les dates et calculez le nombre de nuits
+    // Analyser les dates et calculer le nombre de nuits
     const arrival = new Date(arrivalDateElement);
     const departure = new Date(departureDateElement);
     const timeDifference = departure - arrival;
     const numberOfNights = timeDifference / (1000 * 3600 * 24); // Convertir les millisecondes en jours
 
-    // Récupérez les valeurs du DOM après les vérifications
+    // Récupérer les valeurs du DOM après les vérifications
     const place = document.getElementById('place').innerText;
     const pricePerNight = parseFloat(pricePerNightElement.innerText);
     const cleaningFees = parseFloat(cleaningFeesElement.innerText);
     const serviceFees = parseFloat(serviceFeesElement.innerText);
     const totalTax = parseFloat(taxElement.innerText);
     const totalPrice = parseFloat(document.getElementById('total-price').innerText);
-    const imageUrl = "All_img/img_House/H1/H1_1.avif";
+    const imageUrl = "All_img/img_House/H4/H4_1.avif";
 
-    // Vérifiez si les éléments existent avant de continuer
+    // Assurez-vous que les éléments existent avant de continuer
     if (!arrivalDateElement || !departureDateElement || !pricePerNightElement || !tnpElement || !cleaningFeesElement || !serviceFeesElement) {
-        alert("Un ou plusieurs éléments sont manquants. Veuillez vérifier votre HTML.");
+        alert("Un ou plusieurs éléments manquent. Veuillez vérifier votre HTML.");
         return;
     }
 
-    // Validez les données de prix
+    // Valider les données de prix
     if (isNaN(pricePerNight) || isNaN(cleaningFees) || isNaN(serviceFees) || isNaN(numberOfNights)) {
         alert("Données de prix invalides. Veuillez vérifier vos éléments de prix.");
         return;
     }
 
-    // Préparez l'objet de données de réservation
+    // Préparer l'objet de données de réservation
     const reservationData = {
-        place: place,               // Utilisez l'emplacement du DOM
-        numberOfNights: numberOfNights,  // Utilisez le nombre calculé de nuits
+        place: place,               // Utiliser le lieu depuis le DOM
+        numberOfNights: numberOfNights,  // Utiliser le nombre de nuits calculé
         pricePerNight: pricePerNight,
         cleaningFees: cleaningFees,
         serviceFees: serviceFees,
@@ -138,14 +140,14 @@ function storeReservationData() {
         imageUrl: imageUrl
     };    
 
-    // Stockez les données de réservation dans le localStorage
+    // Stocker les données de réservation dans le localStorage
     localStorage.setItem('reservationData', JSON.stringify(reservationData));
 
-    console.log("Données stockées :", reservationData); // Journal de débogage
+    console.log("Enregistrement des données:", reservationData); // Journal de débogage
 
-    alert('Les données de réservation et de prix ont été stockées dans le localStorage !');
+    alert('Les données de réservation et de prix ont été stockées dans localStorage!');
 
-    window.location.href = "Buy.html"; // Rediriger vers la page d'achat
+    window.location.href = "Buy.html"; // Redirection vers la page Buy
 }
 
 ////////// Écouteur d'événement pour le bouton de réservation

@@ -1,15 +1,15 @@
-// Initialize Supabase
-const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co'; // Replace with your URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4Y2Jrb2R2Y2F6cW91cmNqeGduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYyNjUxMzksImV4cCI6MjA1MTg0MTEzOX0.XW1CCPWVH_me3oPdpdXDqjgKrNTesLqBqg28WwwX4io'; // Replace with your anon key
+// Initialiser Supabase
+const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co'; // Remplacer par votre URL
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4Y2Jrb2R2Y2F6cW91cmNqeGduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYyNjUxMzksImV4cCI6MjA1MTg0MTEzOX0.XW1CCPWVH_me3oPdpdXDqjgKrNTesLqBqg28WwwX4io'; // Remplacer par votre clé anonyme
 
 let supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Add event listener to the checkout form
+    // Ajouter un écouteur d'événements pour le formulaire de paiement
     document.getElementById('checkout-form').addEventListener('submit', function (event) {
-        event.preventDefault();  // Prevent default form submission
+        event.preventDefault();  // Empêcher l'envoi par défaut du formulaire
 
-        // Collect form data
+        // Collecter les données du formulaire
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const address = document.getElementById('address').value;
@@ -17,51 +17,53 @@ document.addEventListener('DOMContentLoaded', function () {
         const expirationDate = document.getElementById('expiration-date').value;
         const cvv = document.getElementById('cvv').value;
 
-        // Simple validation for empty fields
+        // Validation simple pour les champs vides
         if (!name || !email || !address || !paymentMethod || !expirationDate || !cvv) {
-            alert("Please fill out all fields.");
+            alert("Veuillez remplir tous les champs.");
             return;
         }
 
-        // For now, just alert the user that the booking is complete
-        alert(`Booking Complete!\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nPayment Method: ${paymentMethod}\nExpiration Date: ${expirationDate}`);
+        // Pour l'instant, juste avertir l'utilisateur que la réservation est terminée
+        alert(`Réservation terminée !\nNom : ${name}\nEmail : ${email}\nAdresse : ${address}\nMode de paiement : ${paymentMethod}\nDate d'expiration : ${expirationDate}`);
 
-        // Optionally, clear the form or redirect to a thank you page
+        // Optionnellement, réinitialiser le formulaire ou rediriger vers une page de remerciements
         document.getElementById('checkout-form').reset();
-        retrieveData();  // Retrieve and display user data
-        insertListingForUser();  // Now call insertListingForUser without passing parsedData
-        // Call this function when you want to retrieve and display the reservation data
-        //window.location.href = "Recu.html";  // Redirect to the home page
+        retrieveData();  // Récupérer et afficher les données de l'utilisateur
+        insertListingForUser();  // Appeler insertListingForUser sans passer parsedData
+        // Appeler cette fonction lorsque vous voulez récupérer et afficher les données de la réservation
+        setTimeout(function() {
+            window.location.href = "Recu.html";  // Rediriger vers la page de reçu
+        }, 2500);  // Attendre 2,5 secondes
     });
 
-    // Handle the Cancel button click event
+    // Gérer l'événement de clic sur le bouton Annuler
     document.getElementById('cancel-button').addEventListener('click', function () {
         localStorage.removeItem('reservationData');
-        alert("Reservation has been cancelled.");
-        window.location.href = "House.html";  // Redirect to the home page
+        alert("La réservation a été annulée.");
+        window.location.href = "House.html";  // Rediriger vers la page d'accueil
     });
     getReservationData();
  
 });
 
-// Declare parsedData globally
+// Déclarer parsedData globalement
 let parsedData = null;
 let userData = null;
 
 function getReservationData() {
-    // Retrieve the reservation data from localStorage
+    // Récupérer les données de réservation depuis le localStorage
     const reservationData = localStorage.getItem('reservationData');
 
-    // Check if data exists in localStorage
+    // Vérifier si des données existent dans le localStorage
     if (reservationData) {
-        // Parse the stringified JSON data back into an object
+        // Analyser les données JSON en chaîne de caractères pour les reconvertir en objet
         parsedData = JSON.parse(reservationData);
 
-        // Log the entire parsedData to see the structure
-        console.log("Retrieved reservation data:", parsedData);
+        // Afficher toutes les données récupérées pour voir leur structure
+        console.log("Données de réservation récupérées :", parsedData);
 
-        // You can now use the parsedData object in your application
-        // Example: Populate some DOM elements with the retrieved data
+        // Vous pouvez maintenant utiliser l'objet parsedData dans votre application
+        // Exemple : Remplir certains éléments du DOM avec les données récupérées
         document.getElementById('place').innerText = parsedData.place;
         document.getElementById('reservation-dates').innerHTML = parsedData.numberOfNights;
         document.getElementById('total-price').innerText = parsedData.numberOfNights * parsedData.pricePerNight;
@@ -71,77 +73,104 @@ function getReservationData() {
         document.getElementById('total-price').innerText = parsedData.totalPrice;
 
     } else {
-        alert("No reservation data found in localStorage.");
+        alert("Aucune donnée de réservation trouvée dans le localStorage.");
     }
 }
 
 async function insertListingForUser() {
     if (!userData || !parsedData) {
-        console.error('Missing userData or parsedData');
-        return;  // Early return if data is missing
+        console.error('Données utilisateur ou données de réservation manquantes');
+        return;  // Retourner tôt si les données sont manquantes
     }
 
     const place = parsedData.place;
     const totalPrice = parsedData.totalPrice;
-    const username = userData.username;  // Accessing username from userData
-    console.log("Username:", username);
-    // Example data for new listing
+    const username = userData.username;  // Accéder au nom d'utilisateur depuis userData
+    const imageUrl = parsedData.imageUrl;
+    console.log("Nom d'utilisateur :", username);
+
+    // Exemple de données pour une nouvelle annonce
     const newListing = {
         title: place,
         price: totalPrice,
-        image: "All_img/img_House/H1/H1_1.avif",
-        username: username,  // Ensure the username is included in the listing
+        image: imageUrl,
+        username: username,  // S'assurer que le nom d'utilisateur est inclus dans l'annonce
     };
 
-    // Log the new listing to check the data structure
-    console.log("New Listing Data:", newListing);
-
     try {
-        // Insert or update the new listing in Supabase
+        // Récupérer les annonces existantes pour l'utilisateur
+        const { data: existingData, error: fetchError } = await supabaseClient
+            .from('Compte')  // Remplacer par votre nom de table Supabase
+            .select('newListing')
+            .eq('username', username)
+            .single();
+
+        if (fetchError) {
+            console.error("Erreur lors de la récupération des annonces existantes :", fetchError);
+            alert("Échec de la récupération des annonces existantes. Veuillez réessayer.");
+            return;
+        }
+
+        // Analyser les annonces existantes ou initialiser un tableau vide s'il n'y en a pas
+        let existingListings = [];
+        if (existingData && existingData.newListing) {
+            try {
+                existingListings = JSON.parse(existingData.newListing);
+                if (!Array.isArray(existingListings)) {
+                    existingListings = [];
+                }
+            } catch (e) {
+                console.error("Erreur lors de l'analyse des annonces existantes :", e);
+                existingListings = [];
+            }
+        }
+
+        // Ajouter la nouvelle annonce à la liste existante
+        existingListings.push(newListing);
+
+        // Mettre à jour les annonces de l'utilisateur dans Supabase
         const { data, error } = await supabaseClient
-            .from('Compte')  // Replace with your actual Supabase table name
-            .upsert({        // Use upsert to insert or update
-                username: username,
-                newListing: newListing,  // Store the listing under the user's data
-            });
+            .from('Compte')  // Remplacer par votre nom de table Supabase
+            .update({ newListing: JSON.stringify(existingListings) })
+            .eq('username', username);
 
         if (error) {
-            console.error("Error inserting listing:", error);  // Log any Supabase errors
-            alert("Failed to insert listing. Please try again.");
+            console.error("Erreur lors de la mise à jour des annonces :", error);
+            alert("Échec de la mise à jour des annonces. Veuillez réessayer.");
         } else {
-            console.log("Listing successfully inserted:", data);  // Log the response
-            alert("Listing added successfully!");
+            console.log("Annonce mise à jour avec succès :", data);
+            alert("Annonce ajoutée avec succès !");
         }
     } catch (err) {
-        console.error('Error during Supabase insertion:', err);  // Log unexpected errors
-        alert("An error occurred while inserting the listing.");
+        console.error('Erreur lors de l\'insertion dans Supabase :', err);
+        alert("Une erreur est survenue lors de l'insertion de l'annonce.");
     }
 }
 
 
 function retrieveData() {
-    // Retrieve the data from localStorage using the same key ('user')
+    // Récupérer les données du localStorage avec la même clé ('user')
     const storedUserData = localStorage.getItem('user');
     
-    // Ensure the data exists in localStorage
+    // Vérifier si des données existent dans le localStorage
     if (storedUserData) {
-        // Parse the JSON string back into an object
-        userData = JSON.parse(storedUserData);  // Update the global variable
+        // Analyser la chaîne JSON pour la reconvertir en objet
+        userData = JSON.parse(storedUserData);  // Mettre à jour la variable globale
 
-        // Debugging log to check the structure of userData
-        console.log("Retrieved user data:", userData);  // Debugging log
+        // Log de débogage pour vérifier la structure de userData
+        console.log("Données utilisateur récupérées :", userData);  // Log de débogage
 
-        // Access and use user data here
+        // Accéder et utiliser les données utilisateur ici
         const userInfoDiv = document.getElementById('user-info');
         if (userInfoDiv) {
-            // Example: Display the username on the page
-            userInfoDiv.innerHTML = `Username: ${userData.username}`;
+            // Exemple : Afficher le nom d'utilisateur sur la page
+            userInfoDiv.innerHTML = `Nom d'utilisateur : ${userData.username}`;
         }
     } else {
-        // If no data found in localStorage
+        // Si aucune donnée n'a été trouvée dans le localStorage
         const userInfoDiv = document.getElementById('user-info');
         if (userInfoDiv) {
-            userInfoDiv.innerHTML = 'No user data found in localStorage.';
+            userInfoDiv.innerHTML = 'Aucune donnée utilisateur trouvée dans le localStorage.';
         }
     }
 }

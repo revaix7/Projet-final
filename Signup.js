@@ -1,34 +1,34 @@
-const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co'; // Replace with your URL
+const supabaseUrl = 'https://sxcbkodvcazqourcjxgn.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4Y2Jrb2R2Y2F6cW91cmNqeGduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYyNjUxMzksImV4cCI6MjA1MTg0MTEzOX0.XW1CCPWVH_me3oPdpdXDqjgKrNTesLqBqg28WwwX4io'; // Replace with your anon key
 
-// Initialize Supabase client
+// Initialiser le client Supabase
 let supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Add event listener to the signup form
+    // Ajouter un écouteur d’événements au formulaire d’inscription
     document.getElementById('signup-form').addEventListener('submit', handleFormSubmit);
 });
 
-// Function to handle form submission
+// Fonction de gestion de l’envoi de formulaires
 async function handleFormSubmit(event, attempt = 1) {
     event.preventDefault();
 
-    const submitButton = document.getElementById('submit-button'); // Access the submit button by ID
-    submitButton.disabled = true; // Disable the button to prevent multiple submissions
+    const submitButton = document.getElementById('submit-button'); // Accéder au bouton Soumettre par ID
+    submitButton.disabled = true; // Permet d’activer le bouton pour éviter les soumissions multiples
 
     const { username, email, password, confirmPassword } = getFormData();
 
-    // Enhanced email validation with common TLDs
+    // Validation améliorée des e-mails avec les TLD courants
     const emailRegex = /^[^\s@]+@[^\s@]+\.(com|org|net|co|io|edu|gov)$/;
     if (!emailRegex.test(email)) {
         displayError('Veuillez entrer une adresse e-mail valide avec un TLD courant.');
-        submitButton.disabled = false; // Re-enable the button
+        submitButton.disabled = false; // Réactiver le bouton
         return;
     }
 
     if (password.length < 6) {
         displayError('Le mot de passe doit comporter au moins 6 caractères.');
-        submitButton.disabled = false; // Re-enable the button
+        submitButton.disabled = false; // Réactiver le bouton
         return;
     }
 
@@ -38,35 +38,35 @@ async function handleFormSubmit(event, attempt = 1) {
         return;
     }
 
-    displayError(''); // Clear previous errors
+    displayError(''); // Effacer les erreurs précédentes
 
     try {
-        const uniqueId = generateUniqueId(); // Generate a unique ID for the user
-        await saveUserToDatabase(username, email, password, uniqueId); // Save user details to DB (including password and unique ID)
+        const uniqueId = generateUniqueId(); // Générer un ID unique pour l’utilisateur
+        await saveUserToDatabase(username, email, password, uniqueId); // Enregistrer les détails de l’utilisateur dans la base de données (y compris le mot de passe et l’identifiant unique)
         alert('Inscription réussie! Veuillez vérifier votre e-mail pour confirmation.');
-        window.location.href = 'Login.html'; // Redirect to login page
+        window.location.href = 'Login.html'; // Rediriger vers la page de connexion
     } catch (error) {
-        if (error.message === "email rate limit exceeded" && attempt < 4) { // Retry max 3 times
-            const delayTime = Math.pow(2, attempt) * 1000; // Exponential backoff (1s, 2s, 4s)
+        if (error.message === "email rate limit exceeded" && attempt < 4) { // Réessayez 3 fois maximum
+            const delayTime = Math.pow(2, attempt) * 1000; // Recul exponentiel (1 s, 2 s, 4 s)
             displayError(`Trop de tentatives. Veuillez réessayer dans ${delayTime / 1000} secondes.`);
-            await delay(delayTime); // Wait for exponential backoff time before retrying
-            handleFormSubmit(event, attempt + 1); // Retry the form submission
+            await delay(delayTime); // Attendez un temps d’interruption exponentiel avant de réessayer
+            handleFormSubmit(event, attempt + 1); // Réessayez l’envoi du formulaire
         } else {
             displayError('Quelque chose a mal tourné. Veuillez réessayer plus tard.');
-            submitButton.disabled = false; // Re-enable button if retry limit reached
+            submitButton.disabled = false; // Bouton Réactiver si la limite de nouvelles tentatives est atteinte
         }
         console.error('Error during signup:', error);
     } finally {
-        submitButton.disabled = false; // Re-enable the button after the operation
+        submitButton.disabled = false; // Réactivez le bouton après l’opération
     }
 }
 
-// Function to add a delay (in milliseconds)
+// Fonction permettant d’ajouter un délai (en millisecondes)
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Function to get form data
+// Fonction permettant d’obtenir des données de formulaire
 function getFormData() {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
@@ -76,28 +76,29 @@ function getFormData() {
     return { username, email, password, confirmPassword };
 }
 
-// Function to validate passwords
+// FFonction permettant de générer un identifiant unique
 function validatePasswords(password, confirmPassword) {
     return password === confirmPassword;
 }
 
 // Function to generate a unique ID
 function generateUniqueId() {
-    // Generate a unique ID based on the current timestamp and a random string
+    // Générer un ID unique basé sur le timestamp actuel et une chaîne aléatoire
     return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); 
 }
 
-// Function to save user details in the database (including password and unique ID)
+// Fonction d’enregistrement des données de l’utilisateur dans la base de données (y compris le mot de passe et l’identifiant unique)
 async function saveUserToDatabase(username, email, password, uniqueId) {
     const { data, error } = await supabaseClient
-        .from('Compte') // Ensure this is the correct table name
-        .insert([{ username, email, password, unique_id: uniqueId }]); // Store username, email, password, and unique_id in your custom database
+        .from('Compte')
+        .insert([{ username, email, password, unique_id: uniqueId }]); // Stockez le nom d’utilisateur, l’adresse e-mail, le mot de passe et unique_id dans la base de données
+
     
     if (error) throw new Error('Database error saving new user: ' + error.message);
-    console.log('User saved to database:', data); // Optionally log the saved data
+    console.log('User saved to database:', data); // Enregistrer éventuellement les données enregistrées
 }
 
-// Function to display error messages
+// Fonction d’affichage des messages d’erreur
 function displayError(message) {
     document.getElementById('error-message').textContent = message;
 }
